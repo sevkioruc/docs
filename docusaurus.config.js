@@ -58,6 +58,16 @@ const config = {
               position: 'right',
               className: 'header-github-link'
             },
+            {
+              href: 'https://discord.gg/MJbUjwskdH',
+              position: 'right',
+              className: 'header-discord-link'
+            },
+            {
+              href: 'https://twitter.com/getPermify',
+              position: 'right',
+              className: 'header-twitter-link'
+            }
           ],
         },
         footer: {
