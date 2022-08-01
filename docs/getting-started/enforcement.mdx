@@ -32,9 +32,9 @@ POST /v1/permissions/check
 
 ```json
 {
-  "user": "1",
+  "user": "1", // user 1
   "action": "push",
-  "object": "repository:1"
+  "object": "repository:1" // repository 1
 }
 ```
 
@@ -42,7 +42,18 @@ POST /v1/permissions/check
 
 ```json
 {
-  "can": true,
-  "debug": "user 1 is a owner of organization 1"
+  "can": false,  // main decision
+  "decisions": { // decision logs
+    "repository:1#parent.admin": {
+      "can": false,
+      "err": null
+    },
+    "repository:1#parent.member": {
+      "can": false,
+      "err": null
+    }
+  }
 }
 ```
+
+
