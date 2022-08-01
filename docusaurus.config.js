@@ -13,7 +13,8 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Permify', // Usually your GitHub org/user name.
-  projectName: 'permify', // Usually your repo name.
+  projectName: 'docs', // Usually your repo name.
+  trailingSlash: false,
 
   presets: [
     [
