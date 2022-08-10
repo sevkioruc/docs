@@ -30,7 +30,7 @@ You can use Permify on your server by running Permify on docker. There are 2 alt
 **2.** Run following line.
 
 ```shell
-docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config permify/permify:0.0.1
+docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config permify/permify:0.0.0-alpha1
 ```
 
 Above config path - *{YOUR-CONFIG-PATH}* - addresses ***"config.yaml"*** file, where you configure databases to store and coordinate your authorization data. We provide a YAML file to define database that will store your authorization data. 
@@ -52,7 +52,7 @@ Setup docker desktop, and run service with the following steps;
 2. Open terminal and run following line
 
 ```shell
-docker pull permify/permify:0.0.1
+docker pull permify/permify:0.0.0-alpha1
 ```
 
 3. Open images, and find Permify.
@@ -126,18 +126,21 @@ As we mentioned Permify stores your authorization data in a database you prefer.
 
 ```yaml
 app:
-  name: ‘permify’
-  version: ‘0.0.1’
+  name: 'permify'
+
 http:
-  port: ‘3476’
+  port: 3476
+
 logger:
-  log_level: ‘debug’
-  rollbar_env: ‘permify’
+  log_level: 'debug'
+  rollbar_env: 'permify'
+
 database:
   write:
-    connection: postgres
-    pool_max: 2
-    url: ‘postgres://user:password@host:5432/database_name’
+    connection: 'postgres'
+    database: 'db_name'
+    uri: 'postgres://user:password@host:1241'
+    pool_max: 20
 ```
 
 This configuration file's path is used on docker to address database that authorization data unifies (writeDB).
@@ -159,12 +162,16 @@ Request
 
 ```json
 {
-  "entity": "organization",
-  "object_id": "1", //Organization identifier
-  "relation": "admin",
-  "userset_entity": "",
-  "userset_object_id": "1", //Ashley's identifier
-  "userset_relation": ""
+    "entity": {
+        "type": "organization",
+        "id": "1" //Organization identifier
+    },
+    "relation": "admin",
+    "subject": {
+        "type": "user",
+        "id": "1", //Ashley's identifier
+        "relation": ""
+    }
 }
 ```
 
@@ -203,18 +210,24 @@ POST /v1/permissions/check
 
 | Required | Argument | Type | Default | Description |
 |----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
-| [x]   | user | string | - | the user or user set who wants to take the action.
+| [x]   | entity | string | - | name and id of the entity. Example: organization:1”.
 | [x]   | action | string | - | the action the user wants to perform on the resource |
-| [x]   | object | string | - | name and id of the resource. Example: repository:1” |
+| [x]   | subject | string | - | the user or user set who wants to take the action  |
 | [ ]   | depth | integer | 8 | |
 
 ### Request
 
 ```json
 {
-  "user": "1",
-  "action": "delete_member",
-  "object": "organization:1"
+    "entity": {
+        "type": "organization",
+        "id": "1"
+    },
+    "action": "delete_member",
+    "subject": {
+        "type":"user",
+        "id": "1"
+    }
 }
 ```
 
@@ -222,7 +235,13 @@ POST /v1/permissions/check
 
 ```json
 {
-  "can": true,
-  "debug": "user 1 can delete_member on organization 1"
+    "can": true,
+    "remaining_depth": 5,
+    "decisions": {
+        "organization:1#admin": {
+            "can": true,
+            "err": null
+        }
+    }
 }
 ```
