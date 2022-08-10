@@ -23,17 +23,6 @@ More spesifically, “set of users S has relation R to object O”, where S is i
 
  → First row in our table (id:7), we can see that **organization 1 (set of users in organization) is parent of repository 1**
 
-### Arguments Overview
-
-| Argument | Type |  Description |
-|-------------------|---------|-------------|
-| entity | string |  Name of the object or resource type|
-| object_id | string |  Entity id|
-| relation | string |  Custom relation name. Eg. admin, manager, viewer etc. |
-| userset_entity | string |  User or resource type, which has relation with entity  |
-| userset_object_id | string |  User or resource id, which has relation with entity |
-| userset_relation | string |  User or resource relation of given userset object. |
-
 ## Creating Relational Tuples 
 
 Permify has its own language that you can model your authorization logic with it, we call it Permify Schema. You can define your entities, relations between them and access control decisions of each actions with using Permify Schema. 

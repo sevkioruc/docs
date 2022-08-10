@@ -8,8 +8,6 @@ sidebar_position: 1
 Permify has its own language that you can model your authorization logic with it, we call it Permify Schema. You can 
 define your entities, relations between them and access control decisions with using this schema. Here’s a simple breakdown of our schema.
 
-<img width="1920" alt="DSL_Modeling_Guide_(ActBlue)" src="https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png">
-
 This schema represents your authorization structure and you can publish on Permify API to sending it as a file. You can
 create Permify Schema file with **.perm** file extension. More details about schema configuration covered in 
 [Installation Guide] section. 
@@ -62,7 +60,7 @@ relation [name] @[entity]
 → For better understanding, let's go back to our github example. Organizations and users can have multiple repositories,
 so each repository is related with an organization and user. We can define repository relations as below.
 
-```
+```perm
 entity repository {
 
     relation    owner @user         
@@ -76,12 +74,12 @@ entity repository {
 Actions describe what relations, or relation’s relation can do, think of actions as entity permissions. Actions
 defines who can perform a specific action in which circumstances.
 
-Permify Schema supports `and`, `or`, `and not` and `or not` operators to define actions. Keyword ***action*** need to 
+Permify Schema supports ``and``, ``or``, ``and not`` and ``or`` not operators to define actions. Keyword ***action*** need to 
 used with these operators to form an action.
 
 Lets get back to our github example and create some actions,
 
-```
+```perm
 entity repository {
 
     relation    owner @user         
@@ -115,10 +113,6 @@ entity repository {
 → For more fine grained permission, "user with a admin role and 'either owner of the repository, or member of the organization which repository belongs to'"
 can read.
 
-You can find more example usages from example use cases in [Guides Section].
-
-[Guides Section]:  /docs/guides
-
 ## Github Example 
 
 Here is full implemetation of Github example with using Permify Schema.
@@ -134,7 +128,7 @@ entity organization {
     action create_repository = admin or member
     action delete = admin
 
-} `table:organizations|identifier:id`
+} 
 
 entity repository {
 
