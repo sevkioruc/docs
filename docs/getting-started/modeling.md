@@ -10,11 +10,9 @@ define your entities, relations between them and access control decisions with u
 
 Here’s a simple breakdown of our schema.
 
-<img width="1920" alt="DSL_Modeling_Guide_(ActBlue)" src="https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png">
+![permify-schema](https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png)
 
-This schema represents your authorization model and you can configure it to Permify API via sending schema as a file.
-
-You can create Permify Schema file with **.perm** file extension. More details about schema configuration covered in [Installation Guide] section. 
+This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema as a file. This configuration more covered more detailed in [Installation Guide] section. 
 
 [Installation Guide]:  /docs/installation#configuring-schema-on-permify
 

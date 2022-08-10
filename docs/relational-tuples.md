@@ -20,8 +20,7 @@ corresponding semantics: ***User 'Asher' is an owner of repository:1***
 
 Here’s a simple breakdown of two relational tuples.
 
-<img width="1000" alt="Relation_Tuples_Example-2" src="https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png">
-
+![relational-tuples](https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png)
 
 ## Write Database 
 
