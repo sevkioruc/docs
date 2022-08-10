@@ -4,11 +4,28 @@ sidebar_position: 5
 
 # Storing Relational Tuples
 
+## What is Relational Tuples
+
 Permify stores your authorization data in a database you prefer. We called that database as WriteDB, and you can define it with using our YAML config file.
 
-Think WriteDB as source of truth for your authorization system. We took that approach because a unified authorization system offers important advantages over maintaining separate access control mechanisms for individual applications.
+Relation tuples are the underlying data form that represents object-to-object and object-to-subject relations. 
+
+The simplest form of relational tuple structured as:
+
+***entity # relation @ user***
+
+with an example data : ***repository:1#owner@user:asher***
+
+corresponding semantics: ***User 'Asher' is an owner of repository:1***
+
+Here’s a simple breakdown of two relational tuples.
+
+<img width="1000" alt="Relation_Tuples_Example-2" src="https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png">
+
 
 ## Write Database 
+
+Think WriteDB as source of truth for your authorization system. We took that approach because a unified authorization system offers important advantages over maintaining separate access control mechanisms for individual applications.
 
 But how authorization data stored in WriteDB ? Let's take a look at a snap shot of demo table on sample Write Database.
 
@@ -22,6 +39,7 @@ Alternatively user U can behave as "set of users".
 More spesifically, “set of users S has relation R to object O”, where S is itself specified in terms of another object-relation pair. 
 
  → First row in our table (id:7), we can see that **organization 1 (set of users in organization) is parent of repository 1**
+
 
 ## Creating Relational Tuples 
 
@@ -48,30 +66,12 @@ entity repository {
 
 According to these rules and relations we convert your application data into authorization data as tuples and stored respectively like database table in above.
 
-There are 2 alternatives to create relational tuple,
-
-- Creating customly with a API in your application flows, for example when user created.
-
--  With following CDC (Change Data Capture) pattern.
-
-You can find detailes of these two alternatives in [Move & Synchronize Authorization Data] section.
-
-[Move & Synchronize Authorization Data]: /docs/getting-started/sync-data
-
 ## Graph Of Relations
 
 The relation tuples of the ACL used by Permify can be represented as a graph of relations. This graph will help you
 understand the performance of check engine and the algorithms it uses.
 
 ![graph-of-relations](https://user-images.githubusercontent.com/34595361/181000466-d2f28fc7-3c41-49b3-8731-3c4b34643075.png)
-
-The simplest form of relational tuple structured as:
-
-***entity # relation @ user***
-
-with an example data : ***repository:1#owner@user:asher***
-
-corresponding semantics: ***User 'Asher' is an owner of repository:1***
 
 With these relational tuples store in WriteDB, an example authorization checks take the form of “does user U have relation R to object O?” and are evaluated by a those relational tuples and Permify Schema.
 
