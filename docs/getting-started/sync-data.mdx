@@ -4,12 +4,12 @@ sidebar_position: 2
 
 # Centralizing Authorization Data
 
-Permify aims to unify your authorization data which behave as centralized data source used in access controls check 
+Permify unify your authorization data which behave as centralized data source used in access controls check 
 as a source of truth. 
 
-In Permify authorization data stored as [Relation Tuples] into your preferred database,
+In Permify, authorization data stored as [Relation Tuples] into your preferred database,
 we called that database **writeDB**. And you can define it with YAML configuration file. 
-Permify provides this YAML configuration file to structure where and how to convert and sync your authorization related data.
+Permify provides this YAML configuration file to point out where to store your authorization related data.
 
 [relation tuples]: /docs/relational-tuples
 
@@ -34,16 +34,24 @@ database:
     pool_max: 20
 ```
 
-- **WriteDB:** Where your want to store relation tuples, audits , and decision logs.
+- **write:** Where your want to store relation tuples, audits , and decision logs.
 
 :::info
 Since Permify is an open 
 source solution, its better to have host databases in your servers for **low latency** and **high availability**.
 :::
 
+## How to sync authorization data to WriteDB ?
+
+After database configuration is done and Permify API is running as a REST API on your server. Relational tuples need to migrated or created in writedb. 
+
+Additionally relational tuples can also be created, updated or deleted in runtime, since relations and authorization data's are live instances.
+
+Permify provides a endpoint for creating relational tuples. Basically, you need to notify Permify API when user X is now owner of document Y by creating relational tuples with API request. 
+
 ## Creating Custom Relational Tuples
 
-In case you don't want a Permify listen your databases constanty. You can skip defining listenDB in config YAMl file and can create custom relational tuples manually. You can create custom relational tuples with using "/v1/relationships/write" endpoint.
+You can create custom relational tuples with using "/v1/relationships/write" endpoint.
 
 **Path:** POST /v1/relationships/write
 
