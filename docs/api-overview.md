@@ -13,6 +13,7 @@ Some core paths:
 - [Check Access](#check-access)
 - [Create Relational Tuple](#create-relational-tuple)
 - [Configure Permify Schema](#configure-permify-schema)
+- [Read & Filter Relational Tuples](#read-relational-tuples)
 
 ### Check Access 
 
@@ -23,18 +24,24 @@ a repository object?
 
 | Required | Argument | Type | Default | Description |
 |----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
-| [x]   | user | string | - | the user or user set who wants to take the action. Examples: “1”, “organization:1#owners”
+| [x]   | entity | string | - | name and id of the entity. Example: repository:1”.
 | [x]   | action | string | - | the action the user wants to perform on the resource |
-| [x]   | object | string | - | name and id of the resource. Example: “organization:1” |
-| [ ]   | depth | integer | 8 | |
+| [x]   | subject | string | - | the user or user set who wants to take the action  |
+| [ ]   | depth | integer | 8 | Timeout limit when if recursive database queries got in loop|
 
 #### Request
 
 ```json
 {
-  "user": "1",
+  "entity": {
+    "type": "repository",
+    "id": "1"
+  },
   "action": "push",
-  "object": "repository:1"
+  "subject": {
+    "type":"user",
+    "id": "1"
+  }
 }
 ```
 
@@ -42,8 +49,19 @@ a repository object?
 
 ```json
 {
-  "can": true,
-  "debug": "user 1 is a owner of organization 1"
+  "can": false, // main decision
+  "decisions": { // decision logs
+    "organization:1#member": {
+      "prefix": "not",
+      "can": false,
+      "err": null
+    },
+    "repository:1#owner": {
+      "prefix": "",
+      "can": true,
+      "err": null
+    }
+  }
 }
 ```
 
@@ -55,23 +73,24 @@ Permify allows to create relational tuples to your writeDB.
 
 | Required | Argument | Type | Default | Description |
 |----------|-------------------|--------|---------|-------------|
-| [x]   | entity | string | - | |
-| [x]   | object_id | string | - | |
-| [x]   | relation | string | - | |
-| [ ]   | userset_entity | string | - | |
-| [x]   | userset_object_id | string | - | |
-| [ ]   | userset_relation | string | - | |
+| [x]   | entity | object | - | Type and id of the entity. Example: "organization:1”|
+| [x]   | relation | string | - | Custom relation name. Eg. admin, manager, viewer etc.|
+| [x]   | subject | string | - | User or user set who wants to take the action. |
 
 #### Request
 
 ```json
 {
-  "entity": "organization",
-  "object_id": "1",
-  "relation": "admin",
-  "userset_entity": "",
-  "userset_object_id": "1",
-  "userset_relation": ""
+    "entity": {
+        "type": "organization",
+        "id": "1"
+    },
+    "relation": "admin",
+    "subject": {
+        "type": "user",
+        "id": "1",
+        "relation": ""
+    }
 }
 ```
 
@@ -79,9 +98,72 @@ Permify allows to create relational tuples to your writeDB.
 
 ```json
 {
-  "message": "success"
+    "data": {
+        "entity": {
+            "type": "organization",
+            "id": "1"
+        },
+        "relation": "admin",
+        "subject": {
+            "type": "user",
+            "id": "1"
+        }
+    }
 }
 ```
+
+### Read Relational Tuples
+
+Display and filter relational tuples that stored in WriteDB. 
+
+**Path:** POST /v1/relationship/read
+
+| Required | Argument | Type | Default | Description |
+|----------|-------------------|--------|---------|-------------|
+| [x]   | entity | string | - | entity type |
+| [x]   | id | string | - | | entity type
+
+#### Request
+
+```json
+{
+  "filter": {
+      "entity":  "organization",
+      "id":  "1",
+  }
+}
+```
+
+#### Response
+
+```json
+[
+        {
+            "entity": {
+                "type": "organization",
+                "id": "1"
+            },
+            "relation": "member",
+            "subject": {
+                "type": "user",
+                "id": "1"
+            }
+        },
+        {
+            "entity": {
+                "type": "organization",
+                "id": "1"
+            },
+            "relation": "admin",
+            "subject": {
+                "type": "user",
+                "id": "1"
+            }
+        }
+    ]
+```
+
+
 
 ### Configure Permify Schema 
 
@@ -107,7 +189,7 @@ Delete relation tuple.
 | [x]   | userset_object_id | string | - | |
 | [ ]   | userset_relation | string | - | |
 
-### Request
+#### Request
 
 ```json
 {
@@ -120,7 +202,7 @@ Delete relation tuple.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -130,12 +212,10 @@ Delete relation tuple.
 
 ### Status Ping
 
-Delete relation tuple.
 **Path:** GET /v1/status/ping
 
 ### Status Version
 
-Delete relation tuple.
 **Path:** GET /v1/status/version
 
 
