@@ -23,33 +23,41 @@ POST /v1/permissions/check
 
 | Required | Argument | Type | Default | Description |
 |----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
-| [x]   | user | string | - | the user or user set who wants to take the action.
+| [x]   | entity | string | - | name and id of the entity. Example: repository:1”.
 | [x]   | action | string | - | the action the user wants to perform on the resource |
-| [x]   | object | string | - | name and id of the resource. Example: repository:1” |
-| [ ]   | depth | integer | 8 | |
+| [x]   | subject | string | - | the user or user set who wants to take the action  |
+| [ ]   | depth | integer | 8 | Timeout limit when if recursive database queries got in loop|
 
-### Request
+#### Request
 
 ```json
 {
-  "user": "1", // user 1
+  "entity": {
+    "type": "repository",
+    "id": "1"
+  },
   "action": "push",
-  "object": "repository:1" // repository 1
+  "subject": {
+    "type":"user",
+    "id": "1"
+  }
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
-  "can": false,  // main decision
+  "can": false, // main decision
   "decisions": { // decision logs
-    "repository:1#parent.admin": {
+    "organization:1#member": {
+      "prefix": "not",
       "can": false,
       "err": null
     },
-    "repository:1#parent.member": {
-      "can": false,
+    "repository:1#owner": {
+      "prefix": "",
+      "can": true,
       "err": null
     }
   }
