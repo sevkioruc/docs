@@ -36,7 +36,7 @@ entity repository {
 
 ### Entities
 
-This examples consist 2 entity, 
+This schema consists 3 entities, 
 
 - `user`, represents users. This entity is empty because its only responsible for referencing users.
 
@@ -54,7 +54,7 @@ To define relation, **relations** needed to be created as entity attributes.
 
 #### organization entity
 
-In above schema we defined 2 relation in organization entity, respectively; ``admin`` and ``member`` 
+In our schema we defined 2 relation in organization entity, respectively; ``admin`` and ``member`` 
 
 ```perm
 
@@ -71,7 +71,7 @@ entity organization {
 
 #### repository entity
 
-Repository entity have 2 relations too, these are ``parent`` and ``owner``. Boht of these relations represents actual database elations with other entities rather than role based approach likewise in organization entity.
+Repository entities have 2 relations, these are ``parent`` and ``owner``. Both of these relations represents actual database relations with other entities rather than a role-based approach likewise to the **organization** entity above.
 
 ```perm
 entity repository {
@@ -92,12 +92,12 @@ Permify Schema supports ***and***, ***or***, ***and not*** and ***or not*** oper
 
 #### repository actions
 
-In this example we examined one of the main functionalities can user made on any github repository. These are pushing to repo, reading & viewving repo and deleting that repo. If we think that is a private repository,
+In our schema, we examined one of the main functionalities can the user make on any GitHub repository. These are pushing to the repo, reading & viewing the repo, and deleting that repo. 
 
 We can say only,
 
 - Repository owners can  ``push`` to that repo.
-- Repository owners, whom is also need to have administrative role or be an owner of parent organization, can ``read``.
+- Repository owners, who also need to have an administrative role or be an owner of the parent organization, can ``read``.
 - Repository owners or administrative roles in an organization can ``delete`` the repository.
 
 ```
@@ -137,7 +137,7 @@ repository:12#owner@user:46
 .
 .
 
-For more details about how relational tuples created and stored your preferred database, see Permify [docs](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples created and stored your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
 
 ## Need any help ?
 

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # School Calendar Management
 
-This example shows how to model simple school calendar with Permify's DSL, Permify Schema.
+This example shows how to model simple student calendar management system with Permify's DSL, Permify Schema.
 
 -------
 
@@ -29,9 +29,9 @@ entity class {
 
 ### Entities
 
-This examples consist 3 entity, 
+This schema consists 3 entity, 
 
-- `user`, represents users. This entity is empty because its only responsible for referencing users.
+- `user`, represents users. This entity is empty because it's only responsible for referencing users.
 
 ```perm
   entity user {}
@@ -47,7 +47,7 @@ To define relation, **relations** needed to be created as entity attributes.
 
 #### student entity
 
-In above schema we defined 2 relation in user entity, respectively; ``self`` and ``student`` 
+In our schema above, we defined 2 relation in user entity, respectively; ``self`` and ``student`` 
 
 ```perm
 entity student {
@@ -59,11 +59,11 @@ entity student {
 
 ```
 
-Self describes student itself as a user and teacher represents the teacher that student take class from. 
+**self** describes student itself, and **teacher** represents the teacher that students take a class from. 
 
 #### class entity
 
-Class entity has only one relation, which is ``member``. It represents the member of the class. Basically, students that taking that spesific class.
+The class entity has only one relation, which is ``member``. It represents the member of the class. Basically, students whom taking that specific class.
 
 ```perm
 entity class {
@@ -125,7 +125,7 @@ class:12#member@student:34
 .
 .
 
-For more details about how relational tuples created and stored your preferred database, see Permify [docs](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples created and stored your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
 
 ## Need any help ?
 

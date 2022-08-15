@@ -38,21 +38,21 @@ entity organization {
 
 ### Entities
 
-This examples consist 2 entity, 
+This schema consists 2 entities, 
 
-- `user`, represents users (maybe corresponds as employees). This entity is empty because its only responsible for referencing users.
+- `user`, represents users (maybe corresponds as employees). This entity is empty because it's only responsible for referencing users.
 
 ```perm
   entity user {}
 ```
 
-- `organization`, representing organization that user (employees) belongs. It has several roles and permissions related with the spesific resources such as organization files and vendor files.
+- `organization`, representing the organization the user (employees) belongs. It has several roles and permissions related to the specific resources such as organization files and vendor files.
 
 ### Relations
 
 #### organization entity
 
-To define roles, **relations** needed to be created as entity attributes. In above schema we defined 4 roles respectively; admin, manager, member and agent. 
+We can use **relations** to define roles. In this example, we have 4 organizational wide roles, respectively; admin, manager, member, and agent. 
 
 ```perm
 entity organization {
@@ -65,6 +65,9 @@ entity organization {
 
 }
 ```
+
+Roles (relations) can be scoped with different kinds of entities. But for simplicity, we follow a multi-tenancy approach, which demonstrates each organization has its own roles.
+
 ### Actions
 
 Actions describe what relations, or relation’s relation can do, think of actions as entities' permissions. Actions defines who can perform a specific action in which circumstances.
@@ -73,7 +76,7 @@ Permify Schema supports ***and***, ***or***, ***and not*** and ***or not*** oper
 
 #### organization actions
 
-In this example we define several actions for controling access permissions on organization files and organizations vendor's files.
+In our schema, we define several actions for controlling access permissions on organization files and organization vendor's files.
 
 ```perm
 entity organization {
@@ -91,13 +94,14 @@ entity organization {
 } 
 ```
 
-Let's take a loot at some of actions:
+let's take a look at some of the actions:
 
 - ``action edit_files = admin or manager`` 
-indicates that only admin or manager have permission to edit files in organization.
+indicates that only the admin or manager has permission to edit files in the organization.
 
 - ``action view_files = admin or manager or (member and not agent)``
-indicates that admin, manager or members (without having the agent role) can view organization files.
+indicates that the admin, manager, or members (without having the agent role) can view organization files.
+
 
 
 ## Example Relational Tuples for this case
@@ -114,7 +118,7 @@ organization:21#agent@user:ege
 .
 .
 
-For more details about how relational tuples created and stored your preferred database, see Permify [docs](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples are created and stored in your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
 
 ## Need any help ?
 

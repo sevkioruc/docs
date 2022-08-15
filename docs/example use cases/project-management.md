@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Project Management App
 
-This example shows how to model simple project management system with Permify's DSL, Permify Schema.
+This example shows how to model simple project management app with Permify's DSL, Permify Schema.
 
 -------
 
@@ -50,7 +50,7 @@ entity project {
 
 ### Entities
 
-This examples consist 4 entity, 
+This schema consists 4 entity, 
 
 - `user`, represents users. This entity is empty because its only responsible for referencing users.
 
@@ -66,11 +66,11 @@ This examples consist 4 entity,
 
 ### Relations
 
-To define relation, **relations** needed to be created as entity attributes.
-
 #### organization entity
 
-Organization entity has 2 relations ``admin`` and ``member`` users. Think of these as user roles.
+We can use **relations** to define roles.
+
+The organization entity has 2 relations ``admin`` and ``member`` users. Think of these as organizational-wide roles.
 
 ```perm
 entity organization {
@@ -82,10 +82,11 @@ entity organization {
 
 ```
 
+Roles (relations) can be scoped with different kinds of entities. But for simplicity, we follow a multi-tenancy approach, which demonstrates each organization has its own roles.
+
 #### team entity
 
-Team entity has its own relations respectively,  ``owner``, ``member`` and ``org``
-
+The eeam entity has its own relations respectively,  ``owner``, ``member`` and ``org``
 
 ```perm
 entity team {
@@ -99,7 +100,7 @@ entity team {
 
 #### project entity
 
-Project entity has  ``team`` and ``org`` relations.  ``team``. Both these relations represents parent relationship with other entites, parent team and parent organization.
+Project entity has  ``team`` and ``org`` relations. Both these relations represents parent relationship with other entites, parent team and parent organization.
 
 ```perm
 entity project {
@@ -118,9 +119,13 @@ Permify Schema supports ***and***, ***or***, ***and not*** and ***or not*** oper
 
 #### team actions
 
-Only organization admin (admin role) and team owner can perform editing and deleting the team item. 
+- Only organization ***admin (admin role)*** and ***team owner*** can perform editing and deleting team spesific resources. 
 
-Moreover, for inviting a colleague to a team you must have admin role and either be a owner or member on that team. To remove users in team you must be a owner of that team. And these rules reflects Permify Schema as, 
+- Moreover, for inviting a colleague to a team you must have ***admin role*** and either be a ***owner*** or ***member*** on that team. 
+
+- To remove users in team you must be a ***owner*** of that team. 
+
+And these rules reflects Permify Schema as:
 
 ```perm
 entity team {
@@ -136,7 +141,7 @@ entity team {
 
 #### project actions
 
-And there are the project actions below. It consist checking access for basic operations such as viewving, editing or deleting a project item.
+And there are the project actions below. It consists of checking access for basic operations such as viewing, editing, or deleting project resources.
 
 ```perm
 entity project {
@@ -178,7 +183,7 @@ project:35#team@team:34#....
 
 **--> represents project 54 is in team 34**
 
-For more details about how relational tuples created and stored your preferred database, see Permify [docs](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples created and stored your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
 
 ## Need any help ?
 
