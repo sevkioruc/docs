@@ -28,27 +28,58 @@ Permify's data model is inspired by Google’s consistent, global authorization 
 
 ## Quick Start 
 
-Permify (Beta version) only support Docker for installation right now. Since this is a beta version, installation and implementation alternatives can be differ in further. 
+Permify support containerization for installation right now, installation and implementation alternatives can be differ in further. 
 
-### With terminal
+You run Permify API on your server by pulling Permify container image.
 
-1. Open your terminal.
-2. Run following line.
+- [With Using Terminal](#with-using-terminal)
+- [With Using Docker Desktop](#with-using-docker-desktop) 
+
+### With Using Terminal
+
+**1.** Open your terminal.
+
+**2.** Run following line.
 
 ```shell
-docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config permify/permify:0.0.1
+docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config ghcr.io/permify/permify
 ```
 
-Above config path - *{YOUR-CONFIG-PATH}* - addresses ***"config.yaml"*** file, where you configure databases to store and coordinate your authorization data. We provide a YAML file to define database that will store your authorization data. 
+:::info
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
 
-Check out [Synchronize Authorization Data] section to learn how to create this config YAML file and get more details  about how Permify centralize your authorization data.
+Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
+
+*** Example config.yaml file *** 
+
+```yaml
+app:
+  name: 'permify-demo'
+
+http:
+  port: 3476
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'permify'
+
+database:
+  write:
+    connection: 'postgres'
+    database: 'db_name'
+    uri: 'postgres://user:password@host:1241'
+    pool_max: 20
+```
+
+Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
 
 [Synchronize Authorization Data]:  /docs/getting-started/sync-data
+:::
 
-3. Test your connection.
-    - Create an HTTP GET request ~ localhost:3476/v1/status/ping
+**3.** Test your connection.
+    - Create an HTTP GET request ~ localhost:3476/v1/status/ping 
 
-### With Docker Desktop
+### With Using Docker Desktop
 
 Setup docker desktop, and run service with the following steps;
 
@@ -56,22 +87,53 @@ Setup docker desktop, and run service with the following steps;
 2. Open terminal and run following line
 
 ```shell
-docker pull permify/permify:0.0.1
+docker pull ghcr.io/permify/permify
 ```
 
 3. Open images, and find Permify.
-4. Run Permify with the following credentials (optional setting)
-    - **Container Name:** authorization-container
-
-      Ports:
+4. Run Permify with the following credentials (optional settings)
+    - **Container Name:** permify-container
+      
+      *Ports:*
     - **Local Host:** 3476
-
-      Volumes:
-    - **Host Path:** choose the config file and folder
+      
+      *Volumes:*
+    - **Host Path:** choose the config file's (which addresses **"config.yaml"**) folder.
     - **Container Path:** /config
+
+:::info
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+
+Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
+
+*** Example config.yaml file *** 
+
+```yaml
+app:
+  name: 'permify-demo'
+
+http:
+  port: 3476
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'permify'
+
+database:
+  write:
+    connection: 'postgres'
+    database: 'db_name'
+    uri: 'postgres://user:password@host:1241'
+    pool_max: 20
+```
+
+Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
+
+[Synchronize Authorization Data]:  /docs/getting-started/sync-data
+:::
+
 5. Test your connection.
     - Create an HTTP GET request ~ localhost:3476/v1/status/ping
-
 
 ## Community
 
