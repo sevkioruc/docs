@@ -46,7 +46,7 @@ docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/confi
 ```
 
 :::info
-Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+Above Host Path addresses folder of "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
 
 Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
 
