@@ -6,7 +6,7 @@ sidebar_position: 1
 
 [Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations. You can run Permify container with docker and it works as a Rest API. 
 
-Permify converts & syncs authorization data as relational tuples into a database you point at with a YAML config file. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single call. Access decisions made according to stored relational tuples.
+Permify converts & syncs authorization data as relational tuples into a database you point at with a YAML config file. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
 
 ## Getting Started
 Permify consists of 3 core parts; modeling authorization, synchronizing authorization data and access checks. 

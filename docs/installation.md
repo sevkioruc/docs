@@ -2,49 +2,76 @@
 sidebar_position: 4
 ---
 
-# Installation Guide
-
-This guide shows how Permify works and how to fully implement it. Since this is a beta version of Permify, installation and implementation alternatives can be differ in further. 
-
 ## Quick Recap
 
-To give a quick recap for Permify, it's an open-source authorization service that you can run with docker and works on a Rest API.
+To give a quick recap for Permify, it's an open-source authorization service that you can run with docker and works as a Rest API.
 
-Permify converts, coordinates, and sync your authorization data as relation tuples into your preferred database. And you can check authorization with a single request based on those tuples.
+Permify converts your authorization data as relation tuples into your preferred database. And you can check authorization with a single request based on those tuples.
 
-## Installation
+# Installation Guide
 
-Permify (Beta version) only support Docker for installation right now. 
+This guide shows how to implement Permify into your application. Implementation flow consists of 3 steps,
 
-### Container (Docker)
+1. [Run Permify API in your server](#run-permify-api)
+2. [Model your Authorization with Permify's DSL, Permify Schema](#model-your-authorization-with-permify-schema)
+3. [Convert/Store Authorization Data as Relational Tuples](#convertstore-authorization-data-as-relational-tuples)
 
-You can use Permify on your server by running Permify on docker. There are 2 alternatives for that:
+## Run Permify API
+
+You run Permify API on your server by pulling Permify container image. 
  
 - [With Using Terminal](#with-using-terminal)
 - [With Using Docker Desktop](#with-using-docker-desktop) 
 
-#### With Using Terminal
+:::info
+Permify supports containerization for installation right now. Installation and implementation alternatives can be differ in further. If you have any suggestions about installation [join our discord community](https://discord.com/invite/MJbUjwskdH) to discuss.
+:::
+
+### With Using Terminal
 
 **1.** Open your terminal.
 
 **2.** Run following line.
 
 ```shell
-docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config permify/permify:0.0.0-alpha1
+docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config ghcr.io/permify/permify
 ```
 
-Above config path - *{YOUR-CONFIG-PATH}* - addresses ***"config.yaml"*** file, where you configure databases to store and coordinate your authorization data. We provide a YAML file to define database that will store your authorization data. 
+:::info
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
 
-Check out [Synchronize Authorization Data] section to learn how to create this config YAML file and get more details  about how Permify centralize your authorization data.
+Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
+
+*** Example config.yaml file *** 
+
+```yaml
+app:
+  name: 'permify-demo'
+
+http:
+  port: 3476
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'permify'
+
+database:
+  write:
+    connection: 'postgres'
+    database: 'db_name'
+    uri: 'postgres://user:password@host:1241'
+    pool_max: 20
+```
+
+Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
 
 [Synchronize Authorization Data]:  /docs/getting-started/sync-data
+:::
 
 **3.** Test your connection.
     - Create an HTTP GET request ~ localhost:3476/v1/status/ping 
 
-***Note:*** localhost:3476 is an example base path, you can run Permify API anywhere you want.
-
-#### With Using Docker Desktop
+### With Using Docker Desktop
 
 Setup docker desktop, and run service with the following steps;
 
@@ -52,33 +79,65 @@ Setup docker desktop, and run service with the following steps;
 2. Open terminal and run following line
 
 ```shell
-docker pull permify/permify:0.0.0-alpha1
+docker pull ghcr.io/permify/permify
 ```
 
 3. Open images, and find Permify.
 4. Run Permify with the following credentials (optional settings)
-    - **Container Name:** authorization-container
+    - **Container Name:** permify-container
       
       *Ports:*
     - **Local Host:** 3476
       
       *Volumes:*
-    - **Host Path:** choose the config file's (which addresses *"config.yaml"*) folder.
+    - **Host Path:** choose the config file's (which addresses **"config.yaml"**) folder.
     - **Container Path:** /config
+
+:::info
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+
+Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
+
+*** Example config.yaml file *** 
+
+```yaml
+app:
+  name: 'permify-demo'
+
+http:
+  port: 3476
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'permify'
+
+database:
+  write:
+    connection: 'postgres'
+    database: 'db_name'
+    uri: 'postgres://user:password@host:1241'
+    pool_max: 20
+```
+
+Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
+
+[Synchronize Authorization Data]:  /docs/getting-started/sync-data
+:::
+
 5. Test your connection.
     - Create an HTTP GET request ~ localhost:3476/v1/status/ping
 
-## Building Permify Schema (Modeling)
+## Model your Authorization with Permify Schema
 
-After installation, you need to model your authorization with Permify Schema and condigure it to Permify API by sending schema file. 
+After installation completed and Permify API running, you need to model your authorization with Permify Schema and condigure it to Permify API by sending schema file. 
 
 You can define your entities, relations between them and access control decisions of each actions with using Permify Schema.
 
-### Creating your model
+### Creating your authorization model
 
-Firsly create a file with extension ***".perm"***. This created file is our Permify Schema file.
+Firsly create a file with extension ***".perm"***. This is our Permify Schema file.
 
-To give an example for this guide, we'll be using following user-organization case. 
+To give an example, we'll be using following user-organization authorization case. 
 
 ```perm
 entity user {} 
@@ -88,37 +147,45 @@ entity organization {
     relation admin @user    
     relation member @user     
     
-    action add_member = admin or member
-    action delete_member = admin 
-    action delete = admin
+    action view_files = admin or member
+    action edit_files = admin
 
 } 
 ```
 
-We have 2 entities these are **"user"** and **"organization"**.
+We have 2 entities these are **"user"** and **"organization"**. Entities represents your main tables. We strongly advise naming entities the same as your original database entities.
 
-Organization entity has its own relations (admin and member) which related with user entity.And have access control decision points with rules:  
+Lets roll back our example, 
 
-*Everybody can add member to a organization but only members can remove them, Additionally deleting access granted to users with admin role in organization.*
+- The `user` entity represents users. This entity is empty because it's only responsible for referencing users.
 
-***Note:*** defining user entity is mandatory when creating Permify Schema*
+- The `organization` entity has its own relations (`admin` and `member`) which related with user entity. This entity also  has 2 actions, respectively:
+  - Organization member and admin can view files.
+  - Only admins can edit files.
 
-### Configuring Schema on Permify 
+:::info
+For implementation sake we'll not dive more deep about modeling but you can find more information about modeling on [Modeling Authorization with Permify] section. Also can check out [example use cases] to better understand some basic use cases modeled with Permify Schema. 
 
-After you finished modeling you need to send Permify Schema file to API endpoint **/schemas/replace"** for configuration of your authorization model on Permify API.
+[Modeling Authorization with Permify]: /docs/getting-started/modeling
+[example use cases]: /docs/example-use-cases/simple-rbac
+:::
 
-#### Path : **"/schemas/replace" POST**
+### Configuring Permify Schema on API 
+
+After modeling completed, you need to send Permify Schema file (.perm extension file) to API endpoint **/v1/schemas/write"** for configuration of your authorization model on Permify API.
+
+#### Path : ** POST "/schemas/write"**
 | Required | Argument | Type | Default | Description |
 |----------|-------------------|--------|---------|-------------|
 | [x]   | schema | file | - | Permify Schema file|
 
-You can find mode information on [Modeling Authorization with Permify] section.
+**Example Request on Postman:**
 
-[Modeling Authorization with Permify]: /docs/getting-started/modeling
+![permify-schema](https://user-images.githubusercontent.com/34595361/185436333-77c2c9b7-5537-495c-a4de-e3ef7371d24d.png)
 
-## Storing Relational Tuples
+## Convert/Store Authorization Data as Relational Tuples
 
-After Permify API is running on your server and you completed modeling of your authorization via Permify Schema. Its time to add authorizations data to see Permify in action. 
+After you completed configuration of your authorization model via Permify Schema. Its time to add authorizations data to see Permify in action. 
 
 As we mentioned Permify stores your authorization data in a database you prefer. We called that database as WriteDB, and you can define it with using our YAML config file.
 
@@ -145,16 +212,7 @@ database:
 
 This configuration file's path is used on docker to address database that authorization data unifies (writeDB).
 
-There are 2 approaches manage (add, delete, update) authorization data in Permify;
-
- - [Creating Custom Relational Tuples](https://github.com/Permify/permify/blob/master/assets/content/SYNC.md#creating-custom-relational-tuples) 
- - [With Change Data Capture](https://github.com/Permify/permify/blob/master/assets/content/SYNC.md#with-change-data-capture)
-
-You can find more detailed explanation and implementation for these from [Move & Synchronize Authorization Data] section. For this guide we'll go with creating relational tuples with Permify API.
-
-[Move & Synchronize Authorization Data]: /docs/getting-started/sync-data
-
-You can create custom relational tuples with using "/v1/relationships/write" endpoint. For our guide let's grant one of the team members (Ashley) an admin role. 
+You can create relational tuples with using "/v1/relationships/write" endpoint. For our guide let's grant one of the team members (Ashley) an admin role. 
 
 ### Grant Administration Role to Ashley 
 
@@ -175,21 +233,17 @@ Request
 }
 ```
 
-Response
+**Created relational tuple:** organization:1#admin@1
 
-```json
-{
-  "message": "success"
-}
-```
+**Semantics:** User 1 (Ashley) has admin role on organization 1.
 
-Created relational tuple: ***organization:1#admin@1***
+:::info
+You can find more detailed explanation from [Move & Synchronize Authorization Data] section.
 
-Definition: user 1 (Ashley) has admin role on organization 1.
+[Move & Synchronize Authorization Data]: /docs/getting-started/sync-data
+:::
 
-## Checking Permissions
-
-# Access Control Check
+### Performing Access Control Check
 
 You can check authorization with
 single API call. This check request returns a decision about whether user can perform an action on a certain resource.
@@ -202,7 +256,7 @@ Access decisions generated according to relational tuples, which stored in your 
 
 Lets examine a example access control decision on our organization example: 
 
-***Can the user X delete member on organization Y ?***
+***Can the user X view files on organization Y ?***
 
 ### Path: 
 
@@ -210,9 +264,10 @@ POST /v1/permissions/check
 
 | Required | Argument | Type | Default | Description |
 |----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
-| [x]   | entity | string | - | name and id of the entity. Example: organization:1”.
+| [x]   | entity | object | - | name and id of the entity. Example: organization:1”.
 | [x]   | action | string | - | the action the user wants to perform on the resource |
-| [x]   | subject | string | - | the user or user set who wants to take the action  |
+| [x]   | subject | object | - | the user or user set who wants to take the action  |
+| [ ]   | schema_version | string | - | get results according to given schema version|
 | [ ]   | depth | integer | 8 | |
 
 ### Request
@@ -223,7 +278,7 @@ POST /v1/permissions/check
         "type": "organization",
         "id": "1"
     },
-    "action": "delete_member",
+    "action": "view_files",
     "subject": {
         "type":"user",
         "id": "1"
@@ -245,3 +300,7 @@ POST /v1/permissions/check
     }
 }
 ```
+
+## Need any help ?
+
+Our team is happy to help you get started with Permify. If you struggle with installation or have any questions, [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min). Alternatively you can join our [discord community](https://discord.com/invite/MJbUjwskdH) to discuss.
