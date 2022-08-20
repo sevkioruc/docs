@@ -15,9 +15,9 @@ Permify consists of 3 core parts; modeling authorization, synchronizing authoriz
 - [Centralize & Store Authorization Data]
 - [Access Checks]
 
-[Modeling Authorization]: https://github.com/Permify/permify/blob/master/assets/content/MODEL.md
-[Centralize & Store Authorization Data]: https://github.com/Permify/permify/blob/master/assets/content/SYNC.md
-[Access Checks]: https://github.com/Permify/permify/blob/master/assets/content/ENFORCEMENT.md
+[Modeling Authorization]: : /docs/getting-started/modeling
+[Centralize & Store Authorization Data]: : /docs/getting-started/sync-data
+[Access Checks]: : /docs/getting-started/enforcement
 
 Permify centralize your authorization data with high availability, low latency and with ensuring data consistency. These core parts of Permify aims to ease,
 

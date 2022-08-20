@@ -2,25 +2,81 @@
 sidebar_position: 5
 ---
 
-# Storing Relational Tuples
+# Relational Tuples
 
-## What is Relational Tuples
+## What is Relational Tuples ?
 
-Permify stores your authorization data in a database you prefer. We called that database as WriteDB, and you can define it with using our YAML config file.
+Relation tuples are the underlying data form that represents object-to-object and object-to-subject relations.Each relational tuple represents an action that a specific user or user set can do on a resource.
 
-Relation tuples are the underlying data form that represents object-to-object and object-to-subject relations. 
-
-The simplest form of relational tuple structured as:
-
-***entity # relation @ user***
-
-with an example data : ***repository:1#owner@user:asher***
-
-corresponding semantics: ***User 'Asher' is an owner of repository:1***
-
-Here’s a simple breakdown of two relational tuples.
+The simplest form of relational tuple structured as: `entity # relation @ user`. Here are some relational tuples with semantics,
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png)
+
+### How these Relational Tuples Used ?
+
+In Permify, these relational tuples represents your authorization data. 
+
+Permify stores your relational tuples (authorization data) in a database you prefer. We called that database as Write Database, shortly [WriteDB]. You can configure it with using our [YAML config file]. Stored relational tuples are queried on access control check requests to decide whether user action is authorized. 
+
+[YAML config file]: /docs/getting-started/sync-data
+[WriteDB]: #write-database
+
+## Creating Relational Tuples 
+
+Relational tuples can be created with an simple API call in runtime, since relations and authorization data's are live instances. Each relational tuple should be created according to its authorization model, [Permify Schema]. 
+
+[Permify Schema]: docs/getting-started/modeling
+
+For example, lets say you have a document management system with the following Permify Schema.
+
+```perm
+entity user {} 
+
+entity organization {
+
+    relation member @user
+
+} 
+
+entity document {
+    
+    relation  owner  @user   
+    relation  org    @organization      
+
+    action view   = owner or org.member
+    action edit   = owner 
+    action delete = owner
+} 
+```
+
+ Acorrding to schema above; when user creates a document in a organization, more specifically let say, when user:1 in organization:2 create a document:4 we need to create 2 relational tuples to be stored in [WriteDB]. Respectively,
+
+- `document:4#owner@user:1`
+
+[WriteDB]: #write-database
+
+## API endpoint 
+
+You can create relational tuples by using `/v1/relationships/write` endpoint. 
+
+Send a request to POST - `/v1/relationships/write`
+
+**Request**
+
+```json
+{
+    "entity": {
+        "type": "document",
+        "id": "4" 
+    },
+    "relation": "owner",
+    "subject": {
+        "type": "user",
+        "id": "1", 
+        "relation": ""
+    }
+}
+```
 
 ## Write Database 
 
@@ -38,32 +94,6 @@ Alternatively user U can behave as "set of users".
 More spesifically, “set of users S has relation R to object O”, where S is itself specified in terms of another object-relation pair. 
 
  → First row in our table (id:7), we can see that **organization 1 (set of users in organization) is parent of repository 1**
-
-
-## Creating Relational Tuples 
-
-Permify has its own language that you can model your authorization logic with it, we call it Permify Schema. You can define your entities, relations between them and access control decisions of each actions with using Permify Schema. 
-
-For more details about Permify Schema check out [Modeling Authorization with Permify].
-
-[Modeling Authorization with Permify]: /docs/getting-started/modeling
-
-If we look back to our example above, repository entity and its relations look similar to this on Permify Schema:
-
-```perm
-entity repository {
-
-    relation    owner @user       
-    relation    org   @organization   
-
-    action push   = owner
-    action read   = (owner or org.member) and org.admin
-    action delete = org.admin or owner
-
-} 
-```
-
-According to these rules and relations we convert your application data into authorization data as tuples and stored respectively like database table in above.
 
 ## Graph Of Relations
 

@@ -183,7 +183,7 @@ After modeling completed, you need to send Permify Schema file (.perm extension 
 
 ![permify-schema](https://user-images.githubusercontent.com/34595361/185436333-77c2c9b7-5537-495c-a4de-e3ef7371d24d.png)
 
-## Convert/Store Authorization Data as Relational Tuples
+## Store Authorization Data as Relational Tuples
 
 After you completed configuration of your authorization model via Permify Schema. Its time to add authorizations data to see Permify in action. 
 
@@ -212,11 +212,13 @@ database:
 
 This configuration file's path is used on docker to address database that authorization data unifies (writeDB).
 
-You can create relational tuples with using "/v1/relationships/write" endpoint. For our guide let's grant one of the team members (Ashley) an admin role. 
+### Create Relational Tuples
 
-### Grant Administration Role to Ashley 
+You can create relational tuples as authorization rules at this writeDB by using `/v1/relationships/write` endpoint.
 
-Request
+For our guide let's grant one of the team members (Ashley) an admin role. 
+
+**Request:** POST - `/v1/relationships/write` 
 
 ```json
 {

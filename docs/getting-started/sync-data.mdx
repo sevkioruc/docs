@@ -43,15 +43,13 @@ source solution, its better to have host databases in your servers for **low lat
 
 ## How to sync authorization data to WriteDB ?
 
-After database configuration is done and Permify API is running as a REST API on your server. Relational tuples need to migrated or created in writedb. 
-
-Additionally relational tuples can also be created, updated or deleted in runtime, since relations and authorization data's are live instances.
+After database configuration is done and Permify API is running as a REST API on your server. Relational tuples need to migrated or created in writedb. Additionally relational tuples can also be created, updated or deleted in runtime, since relations and authorization data's are live instances.
 
 Permify provides a endpoint for creating relational tuples. Basically, you need to notify Permify API when user X is now owner of document Y by creating relational tuples with API request. 
 
-## Creating Custom Relational Tuples
+## Creating Relational Tuples
 
-You can create custom relational tuples with using "/v1/relationships/write" endpoint.
+You can create relational tuples with using "/v1/relationships/write" endpoint.
 
 **Path:** POST /v1/relationships/write
 
