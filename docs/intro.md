@@ -127,9 +127,9 @@ database:
     pool_max: 20
 ```
 
-Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
+Check out [Storing Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
 
-[Synchronize Authorization Data]:  /docs/getting-started/sync-data
+[Storing Authorization Data]:  /docs/getting-started/sync-data
 :::
 
 5. Test your connection.
