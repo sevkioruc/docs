@@ -12,11 +12,11 @@ Permify converts & syncs authorization data as relational tuples into a database
 Permify consists of 3 core parts; modeling authorization, synchronizing authorization data and access checks. 
 
 - [Modeling Authorization]
-- [Move & Synchronize Authorization Data]
+- [Centralize & Store Authorization Data]
 - [Access Checks]
 
 [Modeling Authorization]: https://github.com/Permify/permify/blob/master/assets/content/MODEL.md
-[Move & Synchronize Authorization Data]: https://github.com/Permify/permify/blob/master/assets/content/SYNC.md
+[Centralize & Store Authorization Data]: https://github.com/Permify/permify/blob/master/assets/content/SYNC.md
 [Access Checks]: https://github.com/Permify/permify/blob/master/assets/content/ENFORCEMENT.md
 
 Permify centralize your authorization data with high availability, low latency and with ensuring data consistency. These core parts of Permify aims to ease,
@@ -46,7 +46,7 @@ docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/confi
 ```
 
 :::info
-Above Host Path addresses folder of "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
 
 Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
 
