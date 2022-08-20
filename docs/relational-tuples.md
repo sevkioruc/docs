@@ -49,7 +49,7 @@ entity document {
 } 
 ```
 
- Acorrding to schema above; when user creates a document in a organization, more specifically let say, when user:1 in organization:2 create a document:4 we need to create 2 relational tuples to be stored in [WriteDB]. Respectively,
+ According to the schema above; when a user creates a document in an organization, more specifically let's say, when user:1 in organization:2 create a document:4 we need to create the following relational tuple,
 
 - `document:4#owner@user:1`
 

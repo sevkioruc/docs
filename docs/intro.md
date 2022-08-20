@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # What is Permify?
 
-[Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations. You can run Permify container with docker and it works as a Rest API. 
+[Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations. You can run Permify container image and it works as a Rest API. 
 
 Permify converts & syncs authorization data as relational tuples into a database you point at with a YAML config file. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
 
@@ -15,9 +15,9 @@ Permify consists of 3 core parts; modeling authorization, synchronizing authoriz
 - [Centralize & Store Authorization Data]
 - [Access Checks]
 
-[Modeling Authorization]: : /docs/getting-started/modeling
-[Centralize & Store Authorization Data]: : /docs/getting-started/sync-data
-[Access Checks]: : /docs/getting-started/enforcement
+[Modeling Authorization]: /docs/getting-started/modeling
+[Centralize & Store Authorization Data]: /docs/getting-started/sync-data
+[Access Checks]: /docs/getting-started/enforcement
 
 Permify centralize your authorization data with high availability, low latency and with ensuring data consistency. These core parts of Permify aims to ease,
 
@@ -102,7 +102,7 @@ docker pull ghcr.io/permify/permify
     - **Container Path:** /config
 
 :::info
-Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+Above Host Path addresses folder of "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
 
 Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
 
