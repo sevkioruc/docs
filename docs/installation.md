@@ -16,6 +16,10 @@ This guide shows how to implement Permify into your application. Implementation 
 2. [Model your Authorization with Permify's DSL, Permify Schema](#model-your-authorization-with-permify-schema)
 3. [Convert/Store Authorization Data as Relational Tuples](#convertstore-authorization-data-as-relational-tuples)
 
+:::info
+Need any support for installation ? [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
+:::
+
 ## Run Permify API
 
 You run Permify API on your server by pulling Permify container image. 

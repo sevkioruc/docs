@@ -107,6 +107,10 @@ const config = {
           ],
           copyright: `Copyright © ${new Date().getFullYear()} Permify.`,
         },
+        colorMode: {
+          disableSwitch: true,
+          respectPrefersColorScheme: false,
+        },
         prism: {
           theme: lightCodeTheme,
           darkTheme: darkCodeTheme,
