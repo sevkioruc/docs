@@ -16,7 +16,7 @@ Access decisions generated according to relational tuples, which stored in your 
 The [relation tuples] of the ACL used by Permify can be represented as a graph of relations. This graph will help you
 understand the performance of check engine and the algorithms it uses.
 
-[relation tuples]: /docs/relational-tuples.md
+[relation tuples]: /docs/relational-tuples
 
 ![graph-of-relations](https://user-images.githubusercontent.com/34595361/181000466-d2f28fc7-3c41-49b3-8731-3c4b34643075.png)
 
