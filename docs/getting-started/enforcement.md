@@ -11,6 +11,17 @@ Access decisions generated according to relational tuples, which stored in your 
 
 [Permify Schema]:  /docs/getting-started/modeling
 
+## Graph Of Relations
+
+The [relation tuples] of the ACL used by Permify can be represented as a graph of relations. This graph will help you
+understand the performance of check engine and the algorithms it uses.
+
+[relation tuples](/docs/relational-tuples.md)
+
+![graph-of-relations](https://user-images.githubusercontent.com/34595361/181000466-d2f28fc7-3c41-49b3-8731-3c4b34643075.png)
+
+With these relational tuples store in WriteDB, an example authorization checks take the form of “does user U have relation R to object O?” and are evaluated by a those relational tuples and Permify Schema.
+
 ## Example Access Check
 
 Lets examine a example access control decision on github: 

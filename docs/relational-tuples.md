@@ -18,6 +18,8 @@ In Permify, these relational tuples represents your authorization data.
 
 Permify stores your relational tuples (authorization data) in a database you prefer. We called that database as Write Database, shortly [WriteDB]. You can configure it with using our [YAML config file]. Stored relational tuples are queried on access control check requests to decide whether user action is authorized. 
 
+![tuple-creation](https://user-images.githubusercontent.com/34595361/186637488-30838a3b-849a-4859-ae4f-d664137bb6ba.png)
+
 [YAML config file]: /docs/getting-started/sync-data
 [WriteDB]: #write-database
 
@@ -78,6 +80,81 @@ Send a request to POST - `/v1/relationships/write`
 }
 ```
 
+### More Examples 
+
+#### **Organization Admin**
+
+Request
+
+```json
+{
+    "entity": {
+        "type": "organization",
+        "id": "1"
+    },
+    "relation": "admin",
+    "subject": {
+        "type": "user",
+        "id": "1",
+        "relation": ""
+    }
+}
+```
+
+**Created relational tuple:** organization:1#admin@1
+
+**Definition:** User 1 has admin role on organization 1.
+
+#### **Organization Members are Viewer of Repo** 
+
+Request
+
+```json
+{
+    "entity": {
+        "type": "repository",
+        "id": "1"
+    },
+    "relation": "viewer",
+    "subject": {
+        "type": "organization",
+        "id": "2",
+        "relation": "member"
+    }
+}
+```
+
+**Created relational tuple:** repository:1#admin@organization:2#member
+
+**Definition:** Members of organization 2 are viewers of repository 1.
+
+#### **Parent Organization**
+
+Request
+
+```json
+{
+    "entity": {
+        "type": "repository",
+        "id": "1"
+    },
+    "relation": "parent",
+    "subject": {
+        "type": "organization",
+        "id": "1",
+        "relation": "..."
+    }
+}
+```
+
+**Relational Tuple:** repository:1#parent@organization:1#…
+
+**Definition:** Organization 1 is parent of repository 1.
+
+:::info
+Note: `relation: “...”` used when subject type is different from **user** entity. **#…** represents a relation that does not affect the semantics of the tuple.
+:::
+
 ## Write Database 
 
 Think WriteDB as source of truth for your authorization system. We took that approach because a unified authorization system offers important advantages over maintaining separate access control mechanisms for individual applications.
@@ -95,16 +172,6 @@ More spesifically, “set of users S has relation R to object O”, where S is i
 
  → First row in our table (id:7), we can see that **organization 1 (set of users in organization) is parent of repository 1**
 
-## Graph Of Relations
-
-The relation tuples of the ACL used by Permify can be represented as a graph of relations. This graph will help you
-understand the performance of check engine and the algorithms it uses.
-
-![graph-of-relations](https://user-images.githubusercontent.com/34595361/181000466-d2f28fc7-3c41-49b3-8731-3c4b34643075.png)
-
-With these relational tuples store in WriteDB, an example authorization checks take the form of “does user U have relation R to object O?” and are evaluated by a those relational tuples and Permify Schema.
-
 :::info
-Permify's data model is inspired by Google’s Consistent, Global Authorization System, [Google Zanzibar White Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf)
+These relational tuples data form is inspired by Google’s Consistent, Global Authorization System, [Google Zanzibar White Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf)
 :::
-
