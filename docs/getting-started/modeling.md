@@ -14,7 +14,7 @@ Here’s a simple breakdown of our schema.
 
 This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema as a file. This configuration more covered more detailed in [Installation Guide] section. 
 
-[Installation Guide]:  /docs/installation#configuring-schema-on-permify
+[Installation Guide]:  /docs/Installation#configuring-schema-on-permify
 
 For now, lets focus on how you can model your authorization using Permify Schema. We follow a simple example of github access
 control for better understanding. To see completed model you can jump directly to [Github Example](#github-example). 

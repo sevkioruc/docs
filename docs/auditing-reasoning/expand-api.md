@@ -1,0 +1,199 @@
+---
+sidebar_position: 6
+title: "Expand API"
+---
+
+## Reason your Resource Permissions
+
+We developed a expand API to see Permify Schema actions in a tree structure to improve observability and reasonability of access permissions.
+
+Expand API is represented by a userset tree whose leaf nodes are user IDs or usersets pointing to other ⟨object#relation⟩ pairs, and intermediate nodes represent union, intersection, or exclusion operators.
+
+Expand is crucial for our users to reason about the complete set of users and groups that have access to their objects, which allows them to build efficient search indices for access-controlled content. Unlike the Read API, Expand follows indirect references expressed through userset rewrite rules.
+
+### Expand API Usage
+
+To give an example usage for Expand API, let's examine following authorization model.
+
+```perm
+entity user {} 
+
+entity organization {
+
+    relation admin @user    
+    relation member @user    
+
+    action create_repository = admin or member
+    action delete = admin
+
+} 
+
+entity repository {
+
+    relation    parent   @organization 
+    relation    owner    @user           
+
+    action push   = owner
+    action read   = owner and (parent.admin or parent.member)
+
+} 
+```
+
+Above schema - modeled with Permify's DSL - represents a simplified version of GitHub access control. When we look at the repository entity, we can see two actions and corresponding accesses:
+
+ - Only owners can push to a private repository.
+ - To read a private repository, the user should be one of the owners of that repository and need to belong to the parent organization of that repository ( user can either be admin or member on that organization).
+
+According to above authorization model, let's create 3 example relation tuples for testing expand API,
+
+`organization:1#admin@user:1`  --> User 1 is admin in organization 1‍
+
+`repository:1#owner@user:1`  --> User 1 is owner of repository 1  
+
+`repository:1#parent@organization:1#...`  --> repository 1 belongs to organization 1
+
+We can use expand API to reason the access actions. If we want to reason access structure for the read action of repository entity, we can use expand API with ***POST "/v1/permissions/expand"***. 
+
+#### **Path:** POST /v1/permissions/check
+
+| Required | Argument | Type | Default | Description |
+|----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
+| [x]   | entity | string | - | Name and id of the entity. Example: repository:1”.
+| [x]   | action | string | - | The action the user wants to perform on the resource |
+
+<details><summary>Request</summary>
+<p>
+
+```json
+{
+    "entity": {
+        "type": "repository",
+        "id": "1"
+    },
+    "action": "read"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Response</summary>
+<p>
+
+```json
+{
+    "tree": { 
+        "kind": "expand",
+        "operation": "root",
+        "children": [
+            {
+                "kind": "expand",
+                "operation": "intersection",
+                "children": [
+                    {
+                        "kind": "branch",
+                        "target": {
+                            "entity": {
+                                "type": "repository",
+                                "id": "1"
+                            },
+                            "relation": "owner"
+                        },
+                        "children": [
+                            {
+                                "kind": "leaf",
+                                "subject": {
+                                    "type": "user",
+                                    "id": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "kind": "expand",
+                        "operation": "union",
+                        "children": [
+                            {
+                                "kind": "branch",
+                                "target": {
+                                    "entity": {
+                                        "type": "repository",
+                                        "id": "1"
+                                    },
+                                    "relation": "parent.admin"
+                                },
+                                "children": [
+                                    {
+                                        "kind": "expand",
+                                        "operation": "union",
+                                        "children": [
+                                            {
+                                                "kind": "branch",
+                                                "target": {
+                                                    "entity": {
+                                                        "type": "organization",
+                                                        "id": "1"
+                                                    },
+                                                    "relation": "admin"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "kind": "leaf",
+                                                        "subject": {
+                                                            "type": "user",
+                                                            "id": "1"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "branch",
+                                "target": {
+                                    "entity": {
+                                        "type": "repository",
+                                        "id": "1"
+                                    },
+                                    "relation": "parent.member"
+                                },
+                                "children": [
+                                    {
+                                        "kind": "expand",
+                                        "operation": "union",
+                                        "children": [
+                                            {
+                                                "kind": "branch",
+                                                "target": {
+                                                    "entity": {
+                                                        "type": "organization",
+                                                        "id": "1"
+                                                    },
+                                                    "relation": "member"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+</p>
+</details>
+
+#### **Graph Representation of Response**
+
+![graph-of-relations](https://user-images.githubusercontent.com/34595361/186653899-7090feb5-8ef4-4a8c-991f-ed9475a5e1f7.png)
+
+
+
