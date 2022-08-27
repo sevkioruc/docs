@@ -12,7 +12,7 @@ The simplest form of relational tuple structured as: `entity # relation @ user`.
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png)
 
-### How these Relational Tuples Used ?
+### Where Relational Tuples Used ?
 
 In Permify, these relational tuples represents your authorization data. 
 

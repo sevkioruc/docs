@@ -8,6 +8,8 @@ sidebar_position: 1
 
 Permify converts & syncs authorization data as relational tuples into a database you point at with a YAML config file. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
 
+![relational-tuples](https://user-images.githubusercontent.com/34595361/186108668-4c6cb98c-e777-472b-bf05-d8760add82d2.png)
+
 ## Getting Started
 Permify consists of 3 core parts; modeling authorization, synchronizing authorization data and access checks. 
 
@@ -25,115 +27,6 @@ Permify centralize your authorization data with high availability, low latency a
 - Maintaining separate access control mechanisms for individual applications.
 
 Permify's data model is inspired by Google’s consistent, global authorization system, [Google Zanzibar Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf).
-
-## Quick Start 
-
-Permify support containerization for installation right now, installation and implementation alternatives can be differ in further. 
-
-You run Permify API on your server by pulling Permify container image.
-
-- [With Using Terminal](#with-using-terminal)
-- [With Using Docker Desktop](#with-using-docker-desktop) 
-
-### With Using Terminal
-
-**1.** Open your terminal.
-
-**2.** Run following line.
-
-```shell
-docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config ghcr.io/permify/permify
-```
-
-:::info
-Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
-
-Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
-
-*** Example config.yaml file *** 
-
-```yaml
-app:
-  name: 'permify-demo'
-
-http:
-  port: 3476
-
-logger:
-  log_level: 'debug'
-  rollbar_env: 'permify'
-
-database:
-  write:
-    connection: 'postgres'
-    database: 'db_name'
-    uri: 'postgres://user:password@host:1241'
-    pool_max: 20
-```
-
-Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
-
-[Synchronize Authorization Data]:  /docs/getting-started/sync-data
-:::
-
-**3.** Test your connection.
-    - Create an HTTP GET request ~ localhost:3476/v1/status/ping 
-
-### With Using Docker Desktop
-
-Setup docker desktop, and run service with the following steps;
-
-1. Open your docker account.
-2. Open terminal and run following line
-
-```shell
-docker pull ghcr.io/permify/permify
-```
-
-3. Open images, and find Permify.
-4. Run Permify with the following credentials (optional settings)
-    - **Container Name:** permify-container
-      
-      *Ports:*
-    - **Local Host:** 3476
-      
-      *Volumes:*
-    - **Host Path:** choose the config file's (which addresses **"config.yaml"**) folder.
-    - **Container Path:** /config
-
-:::info
-Above Host Path addresses folder of "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
-
-Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
-
-*** Example config.yaml file *** 
-
-```yaml
-app:
-  name: 'permify-demo'
-
-http:
-  port: 3476
-
-logger:
-  log_level: 'debug'
-  rollbar_env: 'permify'
-
-database:
-  write:
-    connection: 'postgres'
-    database: 'db_name'
-    uri: 'postgres://user:password@host:1241'
-    pool_max: 20
-```
-
-Check out [Storing Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
-
-[Storing Authorization Data]:  /docs/getting-started/sync-data
-:::
-
-5. Test your connection.
-    - Create an HTTP GET request ~ localhost:3476/v1/status/ping
 
 ## Community
 
