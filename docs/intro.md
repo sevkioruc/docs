@@ -6,9 +6,34 @@ sidebar_position: 1
 
 [Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations. You can run Permify container image and it works as a Rest API. 
 
-Permify converts & syncs authorization data as relational tuples into a database you point at with a YAML config file. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
+Permify converts authorization data as relational tuples into a database you point at to centralize your authorization data source. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/186108668-4c6cb98c-e777-472b-bf05-d8760add82d2.png)
+
+## Permify works best:
+
+- If you already have an identity/auth solution and want to plug in fine-grained authorization on top of that.
+- If you want to create a unified access control mechanism for individual applications.
+- If you’re managing authorization for growing micro-service infrastructure.
+- If your authorization logic is cluttering your code base.
+- If your data model is getting too complicated to handle your authorization within the service.
+- If your authorization is growing too complex to handle within code or API gateway.
+
+## Features
+
+🔐 Convert & store authorization data **in house** with high availability.
+
+🔮 Easily model and refactor your authorization with **Permify's DSL, Permify Schema**.
+
+📝 **Audit & Reason** your access control hassle-free with user interface.
+
+✅ Low latency with **parallel graph engine** on access checks.
+
+🩺 Analyze **performance and behavior** of your authorization with tracing tools [jaeger], [signoz] or [zipkin].
+
+[jaeger]: https://www.jaegertracing.io/
+[signoz]: https://signoz.io/
+[zipkin]: https://zipkin.io/
 
 ## Getting Started
 Permify consists of 3 core parts; modeling authorization, synchronizing authorization data and access checks. 
