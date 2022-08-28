@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # What is Permify?
 
-[Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations. You can run Permify container image and it works as a Rest API. 
+[Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations accross your individual applications and services.
 
-Permify converts authorization data as relational tuples into a database you point at to centralize your authorization data source. And after completing modeling of your authorization with Permify's DSL - Permify Schema, you can perform access checks with a single API call. Access decisions made according to stored relational tuples.
+Permify converts authorization data as relational tuples into a database you point at. We called that database a Write Database (WriteDB) and it behaves as a centralized data source for your authorization system. You can model of your authorization with Permify's DSL - Permify Schema and perform access checks with a single API call anywhere on your stack. Access decisions made according to stored relational tuples.
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/186108668-4c6cb98c-e777-472b-bf05-d8760add82d2.png)
 
@@ -36,20 +36,20 @@ Permify converts authorization data as relational tuples into a database you poi
 [zipkin]: https://zipkin.io/
 
 ## Getting Started
-Permify consists of 3 core parts; modeling authorization, synchronizing authorization data and access checks. 
+Permify consists of 3 core parts; modeling authorization, centralizing authorization data and access checks. 
 
 - [Modeling Authorization]
-- [Centralize & Store Authorization Data]
+- [Centralize Authorization Data]
 - [Access Checks]
 
 [Modeling Authorization]: /docs/getting-started/modeling
-[Centralize & Store Authorization Data]: /docs/getting-started/sync-data
+[Centralize Authorization Data]: /docs/getting-started/sync-data
 [Access Checks]: /docs/getting-started/enforcement
 
 Permify centralize your authorization data with high availability, low latency and with ensuring data consistency. These core parts of Permify aims to ease,
 
 - Creating fine grained authorizations with combining multiple access control approaches.
-- Maintaining separate access control mechanisms for individual applications.
+- Maintaining separate access control mechanisms for individual applications and services.
 
 Permify's data model is inspired by Google’s consistent, global authorization system, [Google Zanzibar Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf).
 
