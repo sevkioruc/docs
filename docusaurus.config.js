@@ -54,7 +54,7 @@ const config = {
               label: 'Docs',
             },
             {
-              to: 'https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3',
+              to: 'https://app.swaggerhub.com/apis-docs/permify/permify-api',
               label: 'API Reference',
               position: 'left',
             },

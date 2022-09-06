@@ -4,11 +4,11 @@ sidebar_position: 6
 
 # API Overview
 
-Permify works as a Rest API. This is the overview section for Permify API. 
+Permify works as a Rest API. This is the overview section for Permify API. See Permify [API Reference](https://app.swaggerhub.com/apis-docs/permify/permify-api) for all endpoints and details.
 
-## Paths
+## Core Paths
 
-Some core functionalities:
+Some core functionalities of Permify API:
 
 - [Check Access](#check-access)
 - [Create Relational Tuple](#create-relational-tuple)
