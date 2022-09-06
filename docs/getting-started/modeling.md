@@ -5,19 +5,18 @@ sidebar_position: 1
 
 ## Permify Schema
 
-Permify has its own language that you can model your authorization logic with it, we call it Permify Schema. You can 
-define your entities, relations between them and access control decisions with using this schema. 
+Permify has its own language that you can model your authorization logic with it, we called it Permify Schema. You can 
+define your entities, relations between them and access control decisions with using Permify Schema. 
 
 Here’s a simple breakdown of our schema.
 
 ![permify-schema](https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png)
 
-This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema as a file. This configuration more covered more detailed in [Installation Guide] section. 
+This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema as a file. This configuration covered more detailed in [Installation Guide] section. 
 
 [Installation Guide]:  /docs/Installation#configuring-schema-on-permify
 
-For now, lets focus on how you can model your authorization using Permify Schema. We follow a simple example of github access
-control for better understanding. To see completed model you can jump directly to [Github Example](#github-example). 
+For now, lets model your authorization using Permify Schema. We follow a simple example of github access control system. To see completed model you can jump directly to [Github Example](#github-example). 
 
 ### Entities
 

@@ -4,11 +4,11 @@ sidebar_position: 6
 
 # API Overview
 
-You can run Permify with docker and it works as a Rest API. This is the overview section for Permify API. 
+Permify works as a Rest API. This is the overview section for Permify API. 
 
 ## Paths
 
-Some core paths:
+Some core functionalities:
 
 - [Check Access](#check-access)
 - [Create Relational Tuple](#create-relational-tuple)
@@ -167,9 +167,9 @@ Display and filter relational tuples that stored in WriteDB.
 
 ### Configure Permify Schema 
 
-After modeling your authorization using Permify Schema, you need to send Permify Schema file for defining your authorization on Permify API.
+After modeling your authorization using Permify Schema, you need to send Permify Schema file for defining your authorization on Permify API. 
 
-**Path:** POST /v1/schemas/replace
+**Path:** POST /v1/schemas/write
 
 | Required | Argument | Type | Default | Description |
 |----------|-------------------|--------|---------|-------------|

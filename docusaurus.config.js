@@ -54,6 +54,11 @@ const config = {
               label: 'Docs',
             },
             {
+              to: 'https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3',
+              label: 'API Reference',
+              position: 'left',
+            },
+            {
               href: 'https://github.com/Permify/permify',
               position: 'right',
               className: 'header-github-link'

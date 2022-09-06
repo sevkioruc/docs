@@ -6,7 +6,7 @@ sidebar_position: 1
 
 [Permify](https://github.com/Permify/permify) is an **open-source authorization service** for creating and maintaining fine-grained authorizations accross your individual applications and services.
 
-Permify converts authorization data as relational tuples into a database you point at. We called that database a Write Database (WriteDB) and it behaves as a centralized data source for your authorization system. You can model of your authorization with Permify's DSL - Permify Schema and perform access checks with a single API call anywhere on your stack. Access decisions made according to stored relational tuples.
+Permify converts authorization data as relational tuples into a database you point at. We called that database Write Database (WriteDB) and it behaves as a centralized data source for your authorization system. You can model your authorization with Permify's DSL - Permify Schema and perform access checks with a single API call anywhere on your stack. Access decisions made according to stored relational tuples.
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/186108668-4c6cb98c-e777-472b-bf05-d8760add82d2.png)
 
