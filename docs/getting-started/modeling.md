@@ -12,18 +12,27 @@ Here’s a simple breakdown of our schema.
 
 ![permify-schema](https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png)
 
-This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema as a file. This configuration covered more detailed in [Installation Guide] section. 
+This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema file. See the [API endpoint](https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3#/Schema/schemas.write) for configuration.
 
 [Installation Guide]:  /docs/Installation#configuring-schema-on-permify
 
-For now, lets model your authorization using Permify Schema. We follow a simple example of github access control system. To see completed model you can jump directly to [Github Example](#github-example). 
+## Developing a Schema
+
+Lets create a example auhtorization model using Permify Schema. We'll follow a simplified version of github access control system. To see completed model you can jump directly to [Github Example](#github-example). 
+
+:::info
+You can start developing Permify Schema on [VSCode]. You can install the extension by searching for **Perm** in the extensions marketplace.
+
+[VSCode]: https://marketplace.visualstudio.com/items?itemName=Permify.perm
+:::
 
 ### Entities
 
-The very first step to build Permify Schema is creating your Entities.
+The very first step to build Permify Schema is creating your Entities. Entity is an object that defines your resources that held role in your permission system.
 
-Entities represent your main tables. The table name and the entity name here must be the same. 
-You can create entitis using **entity** keyword.
+Think of entities as tables in your relationship database. We are strongly advice to name entities same as your database table name that its corresponds. In that way you can easily model and rason your authorization as well as eliminating the error posibility.
+
+You can create entities using **entity** keyword. Since we're following example of simplified github access control, lets create some of our entities as follows.
 
 ```perm
 entity user {}
@@ -33,8 +42,6 @@ entity organization {}
 entity repository {} 
 ```
 
-→ For our github case, we create user, organization and repository entities like above. In that case, name of the user entity represents user table in your database.
-
 Entities has 2 different attributes. These are;
 
 - **relations**
@@ -42,24 +49,20 @@ Entities has 2 different attributes. These are;
 
 ### Relations
 
-Relations represent relationships between entities. Attribute ***relation*** need to used in with several attributes to create a entity relation.
+Relations represent relationships between entities. It's probably the most critical part of the schema because Permify mostly based on relations between resources and their permissions. Keyword ***relation*** need to used to create a entity relation with name and type attributes.
 
 **Relation Attributes:**
 
-- **name:** custom relation name.
-- **entity:** the entity it’s related with (e.g. user, organization, repo…)
-- **table (optional):** the name of the pivot table. (Only for many-to-many relationships.)
-- **rel:(optional):** type of relationship (many-to-many, belongs-to or custom)
-- **cols:(optional):** the columns you have created in your database.
+- **name:** relation name.
+- **type:** relation type, basically the entity it’s related to (e.g. user, organization, document, etc.)
 
 An example relation takes form of,
 
 ```
-relation [name] @[entity] 
+relation [name] @[type] 
 ```
 
-→ For better understanding, let's go back to our github example. Organizations and users can have multiple repositories,
-so each repository is related with an organization and user. We can define repository relations as below.
+→ Organizations and users can have multiple repositories, so each repository is related with an organization and user. We can define repository relations as below.
 
 ```perm
 entity repository {
@@ -69,61 +72,71 @@ entity repository {
 
 }
 ```
+**Defining Multiple Relation Types**
+
+You can define multiple types to a relation with just adding types one after another. 
+
+```perm
+    relation admin @user @repository#owner
+```
+
+When we look at the admin relation, it indicates that the admin can be an `user` as well as this user can be a repository owner. 
+
+***Quick note here:*** with using # you can reach entities relation. When we look at the `@org#owner` specifies that if the user has a relation with the repository, this relation can only be the `owner`. We called that feature locking, because it basically locks the relation type.
+
+Defining multiple relation types totally optional. The goal behind it to improve validation and reasonability. And for complex models, it allows you to model your entitlement in a more structured way. You can find more about usage of multiple relation type and locking feature from ...
 
 ### Actions
 
-Actions describe what relations, or relation’s relation can do, think of actions as entity permissions. Actions
-defines who can perform a specific action in which circumstances.
+Actions describe what relations, or relation’s relation can do. Think of actions as permissions of the entity it belongs. So actions defines who can perform a specific action on a resource in which circumstances. So, the basic form of authorization check in Permify is ***Can the user U perform action X on a resource Y ?***.
 
-Permify Schema supports ``and``, ``or``, ``and not`` and ``or`` not operators to define actions. Keyword ***action*** need to 
-used with these operators to form an action.
+Permify Schema supports ``and``, ``or``, ``and not`` and ``or not`` operators to define actions. Keyword ***action*** need to used with these operators to form an action.
 
-Lets get back to our github example and create some actions,
+Lets get back to our github example and create some actions on repository entity,
 
 ```perm
 entity repository {
 
-    relation    owner @user         
-    relation    org   @organization      
+    relation  owner @user         
+    relation  org   @organization      
     
     ..
     ..
 
-    action push   = owner
+    action push = owner
 
 }
 ```
 
-→ For example, only the repository owner can push to
+→ ``action push = owner`` indicates only the repository owner can push to
 repository.
 
 ```
 entity repository {
 
-    relation    owner @user         
-    relation    org   @organization 
+    relation  owner @user         
+    relation  org   @organization 
 
     ..
     ..
 
-    action read   = (owner or org.member) and org.admin
+    action read = (owner or org.member) and org.admin
 
 }
 ```
 
-→ For more fine grained permission, "user with a admin role and 'either owner of the repository, or member of the organization which repository belongs to'"
-can read.
+→ For more fine grained permission let's examine the ``read`` action rules; user that is ``organization admin`` and either ``owner`` of the repository, or ``organization member`` of the organization which repository belongs to can read.
 
 ## Github Example 
 
-Here is full implemetation of Github example with using Permify Schema.
+Here is full implementation of simple Github access control example with using Permify Schema.
 
 ```perm
 entity user {} 
 
 entity organization {
 
-    relation admin @user     
+    relation admin @user @repository#owner
     relation member @user   
 
     action create_repository = admin or member
@@ -133,8 +146,8 @@ entity organization {
 
 entity repository {
 
-    relation    owner @user        
-    relation    org   @organization    
+    relation org    @organization    
+    relation owner  @user  
 
     action push   = owner 
     action read   = (owner or org.member) and org.admin
@@ -142,3 +155,5 @@ entity repository {
 
 } 
 ```
+
+See more schema examples from the [Example Use Cases](/docs/example-use-cases/simple-rbac) section with their detailed examination.
