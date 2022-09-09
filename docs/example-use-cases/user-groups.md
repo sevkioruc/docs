@@ -2,9 +2,11 @@
 sidebar_position: 3
 ---
 
-# Project Management App
+# User Groups
 
-This example shows how to model simple project management app with Permify's DSL, Permify Schema.
+This use case shows how to organize permissions based on groupings of users or resources. In this use case we'll follow a simple project management app with Permify's DSL, [Permify Schema].
+
+[Permify Schema]: /docs/getting-started/modeling
 
 -------
 
@@ -15,6 +17,7 @@ entity user {}
 
 entity organization {
 
+    //organizational roles
     relation admin @user
     relation member @user
 
@@ -22,20 +25,30 @@ entity organization {
 
 entity team {
 
+    // represents owner or creator of the team
 	relation owner @user
+
+    // represents direct member of the team
 	relation member @user
+
+    // reference for organization that team belong
     relation org @organization
 
+    // organization admins or owners can edit, delete the team details
     action edit = org.admin or owner
     action delete = org.admin or owner
 
+    // to invite someone you need to be admin and either owner or member of this team
     action invite = org.admin and (owner or member)
+
+    // only owners can remove users
     action remove_user =  owner
 
 }
 
 entity project {
 
+    // references for team and organization that project belongs
 	relation team @team
     relation org @organization
 

@@ -2,9 +2,11 @@
 sidebar_position: 2
 ---
 
-# Github Access Control 
+# Organizations & Hierarchies
 
-This example shows how to model basic github push, read and delete repository access control with Permify's DSL, Permify Schema.
+Group your users by organization with giving them access organzational-wide resources. In this use case we'll follow a simplified version of Github's access control that shows how to model basic repository push, read and delete permissions with Permify's DSL, [Permify Schema].
+
+[Permify Schema]: /docs/getting-started/modeling
 
 -------
 
@@ -15,6 +17,7 @@ entity user {}
 
 entity organization {
 
+    // organizational roles
     relation admin @user    
     relation member @user    
 
@@ -22,9 +25,13 @@ entity organization {
 
 entity repository {
 
+    // represents repositories parent organization
     relation    parent   @organization 
+
+    // represents user of this repository
     relation    owner    @user           
 
+    // permissions
     action push   = owner
     action read   = owner and (parent.admin or parent.member)
     action delete = parent.admin or owner

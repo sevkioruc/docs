@@ -2,9 +2,11 @@
 sidebar_position: 1
 ---
 
-# Simple RBAC
+# Role Based Access Control
 
-This example shows how to model simple role based access control for organizational roles and permissions with Permify's DSL, Permify Schema.
+Want to implement RBAC ? Permify fully covers you at that point. Below example shows how to model simple role based access control for organizational roles and permissions with Permify's DSL, [Permify Schema].
+
+[Permify Schema]: /docs/getting-started/modeling
 
 -------
 

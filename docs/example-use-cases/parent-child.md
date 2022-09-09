@@ -2,9 +2,11 @@
 sidebar_position: 4
 ---
 
-# School Calendar Management
+# Parent Child Relationships
 
-This example shows how to model simple student calendar management system with Permify's DSL, Permify Schema.
+See how parent child relations can model in Permify. In this use case we'll follow a simple student-calendar management system with Permify's DSL, [Permify Schema].
+
+[Permify Schema]: /docs/getting-started/modeling
 
 -------
 
@@ -14,13 +16,20 @@ This example shows how to model simple student calendar management system with P
 entity user {}
 
 entity student {
+
+	// refers student itself
 	relation self @user
+
+	// teacher of the student
 	relation teacher @user
 }
 
 entity class {
+
+	// refers class member
 	relation member @student
 
+	// calender view permission
     action view_calendar = member.self or member.teacher
 }
 ```
