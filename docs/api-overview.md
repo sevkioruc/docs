@@ -1,19 +1,23 @@
 ---
-sidebar_position: 6
+sidebar_position: 4
 ---
 
 # API Overview
 
-Permify works as a Rest API. This is the overview section for Permify API. See Permify [API Reference](https://app.swaggerhub.com/apis-docs/permify/permify-api) for all endpoints and details.
+In Permify, authorization structured around 3 core parts; *modeling authorization*, *managing authorization data* and *enforcement*.Therefore, Permify API has sections that represent the functionalities of these core parts.
+
+- **Permission Section**: Consist enforcement requests and options.
+- **Relationship Section**: Authorization data operations such as creating, deleting and reading relational tuples.
+- **Schema Section**: Modeling and Permify Schema related functionalities including configuration and auditing.
+- **Server Section**: Basic server informations.
+
+Permify primarily exposes its APIs via [REST](https://restfulapi.net/), see [API Documentation](https://app.swaggerhub.com/apis-docs/permify/permify-api) for all endpoints and details.
 
 ## Core Paths
-
-Some core functionalities of Permify API:
 
 - [Check Access](#check-access)
 - [Create Relational Tuple](#create-relational-tuple)
 - [Configure Permify Schema](#configure-permify-schema)
-- [Read & Filter Relational Tuples](#read-relational-tuples)
 
 ### Check Access 
 
@@ -24,9 +28,10 @@ a repository object?
 
 | Required | Argument | Type | Default | Description |
 |----------|----------|---------|---------|-------------------------------------------------------------------------------------------|
-| [x]   | entity | string | - | name and id of the entity. Example: repository:1”.
+| [x]   | entity | object | - | name and id of the entity. Example: repository:1”.
 | [x]   | action | string | - | the action the user wants to perform on the resource |
-| [x]   | subject | string | - | the user or user set who wants to take the action  |
+| [x]   | subject | object | - | the user or user set who wants to take the action  |
+| [ ]   | schema_version | string | 8 | Version of the schema |
 | [ ]   | depth | integer | 8 | Timeout limit when if recursive database queries got in loop|
 
 #### Request
@@ -67,7 +72,7 @@ a repository object?
 
 ### Create Relational Tuple
 
-Permify allows to create relational tuples to your writeDB.
+Permify allows to create relational tuples to your preferred database, [writeDB](/docs/getting-started/sync-data.md).
 
 **Path:** POST /v1/relationships/write
 
@@ -76,6 +81,7 @@ Permify allows to create relational tuples to your writeDB.
 | [x]   | entity | object | - | Type and id of the entity. Example: "organization:1”|
 | [x]   | relation | string | - | Custom relation name. Eg. admin, manager, viewer etc.|
 | [x]   | subject | string | - | User or user set who wants to take the action. |
+| [ ]   | schema_version | string | 8 | Version of the schema |
 
 #### Request
 
@@ -112,58 +118,6 @@ Permify allows to create relational tuples to your writeDB.
 }
 ```
 
-### Read Relational Tuples
-
-Display and filter relational tuples that stored in WriteDB. 
-
-**Path:** POST /v1/relationship/read
-
-| Required | Argument | Type | Default | Description |
-|----------|-------------------|--------|---------|-------------|
-| [x]   | entity | string | - | entity type |
-| [x]   | id | string | - | | entity type
-
-#### Request
-
-```json
-{
-  "filter": {
-      "entity":  "organization",
-      "id":  "1",
-  }
-}
-```
-
-#### Response
-
-```json
-[
-        {
-            "entity": {
-                "type": "organization",
-                "id": "1"
-            },
-            "relation": "member",
-            "subject": {
-                "type": "user",
-                "id": "1"
-            }
-        },
-        {
-            "entity": {
-                "type": "organization",
-                "id": "1"
-            },
-            "relation": "admin",
-            "subject": {
-                "type": "user",
-                "id": "1"
-            }
-        }
-    ]
-```
-
-
 
 ### Configure Permify Schema 
 
@@ -174,51 +128,3 @@ After modeling your authorization using Permify Schema, you need to send Permify
 | Required | Argument | Type | Default | Description |
 |----------|-------------------|--------|---------|-------------|
 | [x]   | schema | file | - | Permify Schema file|
-
-### Delete Tuple
-
-Delete relation tuple.
-**Path:** POST /v1/relationships/delete
-
-| Required | Argument | Type | Default | Description |
-|----------|-------------------|--------|---------|-------------|
-| [x]   | entity | string | - | |
-| [x]   | object_id | string | - | |
-| [x]   | relation | string | - | |
-| [ ]   | userset_entity | string | - | |
-| [x]   | userset_object_id | string | - | |
-| [ ]   | userset_relation | string | - | |
-
-#### Request
-
-```json
-{
-  "entity": "organization",
-  "object_id": "1",
-  "relation": "admin",
-  "userset_entity": "",
-  "userset_object_id": "1",
-  "userset_relation": ""
-}
-```
-
-#### Response
-
-```json
-{
-  "message": "success"
-}
-```
-
-### Status Ping
-
-**Path:** GET /v1/status/ping
-
-### Status Version
-
-**Path:** GET /v1/status/version
-
-
-You can find more on [API docs](https://github.com/Permify/permify/tree/master/docs)
-
-

@@ -1,7 +1,4 @@
----
-sidebar_position: 6
-title: "Expand API"
----
+# Expand Schema Actions
 
 ## Reason your Resource Permissions
 
