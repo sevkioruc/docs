@@ -72,7 +72,7 @@ a repository object?
 
 ### Create Relational Tuple
 
-Permify allows to create relational tuples to your preferred database, [writeDB](/docs/getting-started/sync-data.md).
+Permify allows to create relational tuples to your preferred database, writeDB.
 
 **Path:** POST /v1/relationships/write
 
