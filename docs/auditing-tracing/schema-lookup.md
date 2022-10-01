@@ -1,10 +1,6 @@
----
-sidebar_position: 6
----
-
 # Get Permissions of Resources
 
-You can use schem lookup API endpoint to retrieve all permissions associated with a resource relation. Basically, you can perform enforcement without checking stored authorization data. For example in given a Permify Schema like:
+You can use schema lookup API endpoint to retrieve all permissions associated with a resource relation. Basically, you can perform enforcement without checking stored authorization data. For example in given a Permify Schema like:
 
 ```
 entity user {}

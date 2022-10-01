@@ -4,19 +4,21 @@ sidebar_position: 3
 
 # Access Control Check
 
-In Permify, you can check authorization with single [check] request. Basic authorization checks take the form of
+In Permify, you can check authorization with single [check] request. Basic authorization checks take the form of ***Can the subject U perform action X on a resource Y ?***
 
-***Can the subject U perform action X on a resource Y ?***
-
-Permify designed to answer these questions efficiently and with minimal complexity while providing low latency with it's parallel graph engine. 
+Permify designed to answer authorization questions efficiently and with minimal complexity while providing low latency with:
+- Using its parallel graph engine. 
+- Storing the relationships between resources and subjects beforehand in Permify data store: [writeDB], rather than providing these relationships at “check” time.
+- Using in memory cache to store authorization schema.
 
 [check]:  https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3#/Permission/permissions.check
+[writeDB]: ../getting-started/sync-data.md
 
 ## Check Request
 
-Let's follow an simplified github access control decision for examining the check request.
+Let's follow an simplified access control decision for examining the check request.
 
-***Can the user X push on a repository Y ?***
+***Can the user 3 edit document 12 ?***
 
 #### Path: 
 
@@ -35,13 +37,13 @@ POST /v1/permissions/check
 ```json
 {
   "entity": {
-    "type": "repository", 
+    "type": "document", 
     "id": "12"
   },
-  "action": "push",
+  "action": "edit",
   "subject": {
     "type":"user",
-    "id": "1"
+    "id": "3"
   }
 }
 ```
@@ -52,14 +54,14 @@ POST /v1/permissions/check
 {
   "can": false, // check decision
   "decisions": { // decision logs
-    "organization:1#member": {
+    "organization:1#admin": {
       "prefix": "not",
       "can": false,
       "err": null
     },
-    "repository:1#owner": {
+    "document:1#owner": {
       "prefix": "",
-      "can": true,
+      "can": false,
       "err": null
     }
   }
@@ -72,48 +74,54 @@ Access decisions are evaluated by stored [relational tuples] and your authorizat
 
 In high level, access of an subject related with the relationships created between the subject and the resource. You can define this relationships in Permify Schema then create and store them as relational tuples, which is basically your authorization data. 
 
-So the workflow of check request is, 
-1. Lookup to schema for finding the given action's relations.
-2. Walk over a graph of each relation (paralel check) to find whether given subject - user - is related with the action. 
+Permify Engine to compute access decision in 2 steps, 
+1. Looking up authorization model for finding the given action's ( **edit**, **push**, **delete** etc.) relations.
+2. Walk over a graph of each relation to find whether given subject ( user or user set ) is related with the action. 
 
-Let's continue our github example with a schema to understand this workflow,
+Let's turn back to above authorization question ( ***"Can the user 3 edit document 12 ?"*** ) to better understand how decision evaluation works. 
 
 [relational tuples]: /docs/relational-tuples
 [Permify Schema]:  /docs/getting-started/modeling
 
+When Permify Engine recieves this question it ireclty looks up to authorization model to find document `‍edit` action. Let's say we have a model as follows
+
 ```perm
-entity user {} 
+entity user {}
+        
+entity organization {
 
-entity organization { 
+    // organizational roles
+    relation admin @user
+    relation member @user
+}
 
-    relation owner @user  
-    relation member @user   
+entity document {
 
-} 
-
-entity repository {
-
-    relation owner @user
-    relation org @organization
-
-    action push = owner or org.owner or org.member
-   
+    // represents repositories parent organization
+    relation parent @organization
+    
+    // represents owner of this repository
+    relation owner  @user
+    
+    // permissions
+    action edit   = parent.admin or owner
+    action delete = owner
 } 
 ```
 
-Answering access checks is accomplished within Permify using a basic graph walking mechanism. 
+Which has a directed graph as follows:
 
-Below is our push actions graph of relations that defined by above schema and relationships. So this is the graph that Permify walkthough and check whether the user can push.
+![relational-tuples](https://user-images.githubusercontent.com/34595361/193418063-af33fe81-95ed-4615-9d86-b50d4094ad8e.png)
 
-[relation tuples]: /docs/relational-tuples
+As we can see above: only users with an admin role in an organization, which `document:12` belongs, and owners of the `document:12` can edit. Permify runs two concurent queries for **parent.admin** and **owner**:
 
-![graph-of-relations](https://user-images.githubusercontent.com/34595361/181000466-d2f28fc7-3c41-49b3-8731-3c4b34643075.png)
+**Q1:** Get the owners of the `document:12`.
 
-The graph shows a set of paths from the resource (somerepository), through the push action, to the relations defining our rules (owner) and finally to the subjects (user, organization).
+**Q2:** Get admins of the organization where `document:12` belongs to.
 
-We can see that owner, organization owner or organization member can push to a repo. As an example if our check requests asks ***Can Asher push on a somerepository ?*** 
+Since edit action consist **or** between owner and parent.admin, if Permify Engine found user:3 in results of one of these queries then it terminates the other ongoing queries and returns authorized true to the client.
 
-Further walking outward to the relation owner, we can find **Asher**. Since being owner is enough for pushing the answer to our question is “yes”.
+Rather than **or**, if we had an **and** relation then Permify Engine waits the results of these queries to returning a decision. 
 
 
 
