@@ -5,8 +5,9 @@ sidebar_position: 1
 
 ## Permify Schema
 
-Permify has its own language that you can model your authorization logic with it, we called it Permify Schema. You can 
-define your entities, relations between them and access control decisions with using Permify Schema. 
+Permify has its own language that you can model your authorization logic with it, we called it Permify Schema. The language allows to define arbitrary relations between users and objects, such as owner, editor, commenter or roles like admin, manager etc. You can define your entities, relations between them and access control decisions with using Permify Schema. 
+
+It includes set-algebraic operators such as inter- section and union for specifying potentially complex access control policies in terms of those user-object relations.
 
 Here’s a simple breakdown of our schema.
 

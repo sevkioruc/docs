@@ -120,7 +120,9 @@ organization:21#agent@user:ege
 .
 .
 
-For more details about how relational tuples are created and stored in your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples are created and stored in your preferred database, see [Relational Tuples].
+
+[Relational Tuples]: ../getting-started/relational-tuples.md
 
 ## Need any help ?
 

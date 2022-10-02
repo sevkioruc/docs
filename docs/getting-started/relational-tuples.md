@@ -1,18 +1,24 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 # Relational Tuples
 
+In Permify, relationship between your entities, objects, and users builds up a collection of access control lists (ACLs), which are then used in to access decision points. 
+
+As an example; to decide whether a user could view a protected resource, Permify looks up the relations between that specific user and the protected resource. These relation types could be ownership, parent-child relation, or even a role such as an administrator or manager.
+
+A simple ACL takes form of “user U has relation R to object O” and called as relational tuples.
+
 ## What is Relational Tuples ?
 
-Relation tuples are the underlying data form that represents object-to-object and object-to-subject relations.Each relational tuple represents an action that a specific user or user set can do on a resource.
+Relation tuples are the underlying data form that represents object-to-object and object-to-subject relations. Each relational tuple represents an action that a specific user or user set can do on a resource.
 
 The simplest form of relational tuple structured as: `entity # relation @ user`. Here are some relational tuples with semantics,
 
 ![relational-tuples](https://user-images.githubusercontent.com/34595361/183959294-149fcbb9-7f10-4c1e-8d66-20a839893909.png)
 
-### Where Relational Tuples Used ?
+## Where Relational Tuples Used ?
 
 In Permify, these relational tuples represents your authorization data. 
 

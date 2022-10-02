@@ -4,7 +4,7 @@ In Permify, relations between your entities, objects and users stored as [relati
 
 When using Permify, the application client should update writeDB about the changes happening in entities or resources that are related to the authorization structure. For example, somebody when somebody created a wallet or user X joins a group that has edit access on some documents: the application side needs to write relational tuples to keep [writeDB] up-to-date. Besides, each relational tuple should be created according to its authorization model, Permify Schema.
 
-[relational tuples]: ../relational-tuples.md
+[relational tuples]: ../getting-started/relational-tuples.md
 [writeDB]: ../getting-started/sync-data.md
 
 So if user:42 has been granted an admin role in organization:1, relational tuple `organization:1#admin@user:42` must be created by using **/v1/relationships/write** endpoint.

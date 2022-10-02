@@ -196,7 +196,9 @@ project:35#team@team:34#....
 
 **--> represents project 54 is in team 34**
 
-For more details about how relational tuples created and stored your preferred database, see [Relational Tuples](https://docs.permify.co/docs/relational-tuples).
+For more details about how relational tuples created and stored your preferred database, see [Relational Tuples].
+
+[Relational Tuples]: ../getting-started/relational-tuples.md
 
 ## Need any help ?
 
