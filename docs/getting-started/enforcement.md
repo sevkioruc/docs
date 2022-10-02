@@ -11,7 +11,7 @@ Permify designed to answer authorization questions efficiently and with minimal 
 - Storing the relationships between resources and subjects beforehand in Permify data store: [writeDB], rather than providing these relationships at “check” time.
 - Using in memory cache to store authorization schema.
 
-[check]:  https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3#/Permission/permissions.check
+[check]:  https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha4#/Permission/permissions.check
 [writeDB]: ../getting-started/sync-data.md
 
 ## Check Request
