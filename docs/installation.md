@@ -1,37 +1,28 @@
 ---
 sidebar_position: 3
+title: "Set Up In Your Enviroment"
 ---
 
-## Quick Recap
+# Set Up Permify
 
-To give a quick recap for Permify, it's an open-source authorization service that you can run with docker and works as a Rest API.
+Permify is an open-source authorization service that you can run in your enviroment and works as a Rest API. This guide shows how to set up Permify in your servers and use it accross your applications. Set up and implementation consists of 4 steps,
 
-Permify converts your authorization data as relation tuples into your preferred database. And you can check authorization with a single request based on those tuples.
-
-# Installation Guide
-
-This guide shows how to implement Permify into your application. Implementation flow consists of 3 steps,
-
-1. [Run Permify API in your server](#run-permify-api)
+1. [Set Up Permify Service](#run-permify-api)
 2. [Model your Authorization with Permify's DSL, Permify Schema](#model-your-authorization-with-permify-schema)
-3. [Convert/Store Authorization Data as Relational Tuples](#convertstore-authorization-data-as-relational-tuples)
+3. [Migrate and Store Authorization Data as Relational Tuples](#store-authorization-data-as-relational-tuples)
+4. [Perform Access Check](#perform-access-check)
 
 :::info
-Need any support for installation ? [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
+Want to walk through this example 1x1 rather than docs ? [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
 :::
 
-## Run Permify API
+## Set Up Permify Service
 
-You run Permify API on your server by pulling Permify container image. 
- 
-- [With Using Terminal](#with-using-terminal)
-- [With Using Docker Desktop](#with-using-docker-desktop) 
+You can run Permify API on your server by pulling Permify container image. 
 
-:::info
-Permify supports containerization for installation right now. Installation and implementation alternatives can be differ in further. If you have any suggestions about installation [join our discord community](https://discord.com/invite/MJbUjwskdH) to discuss.
-:::
-
-### With Using Terminal
+<details>
+<summary>With Using Terminal</summary>
+<p>
 
 **1.** Open your terminal.
 
@@ -41,8 +32,9 @@ Permify supports containerization for installation right now. Installation and i
 docker run -d -p 3476:3476 --name permify-container -v {YOUR-CONFIG-PATH}:/config ghcr.io/permify/permify
 ```
 
-:::info
-Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+This will start an HTTP server with the configuration options. Port 3476 is used to serve the REST API.
+
+Above config path - {YOUR-CONFIG-PATH} - addresses "config.yaml" file, where you can configure database to store and coordinate your authorization data. 
 
 Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
 
@@ -67,42 +59,49 @@ database:
     pool_max: 20
 ```
 
-Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
+#### **database:**
+* **write:** Points out where your want to store your authorization data (relation tuples, audits, decision logs, authorization model )
+    * **connection:** Data source. Permify supports **MongoDb** (`'mongo'`) and **PostgreSQL**(`'postgres'`) for now. Contact with us for your preferred database.
+    * **database:** Custom database name.
+    * **uri:** Uri of your data source.
+    * **pool_max:** Max connection pool size.
 
-[Synchronize Authorization Data]:  /docs/getting-started/sync-data
-:::
+
+Check out [Centralize Authorization Data] section to learn how to organize this config YAML file and get more details  about how authorization data stored.
+
+[Centralize Authorization Data]:  /docs/getting-started/sync-data
 
 **3.** Test your connection.
-    - Create an HTTP GET request ~ localhost:3476/v1/status/ping 
+    - Create an HTTP GET request ~ localhost:3476/v1/status/ping
 
-### With Using Docker Desktop
+</p>
+</details>
 
-Setup docker desktop, and run service with the following steps;
+<details><summary>With Using Docker Desktop</summary>
+<p>
 
-1. Open your docker account.
-2. Open terminal and run following line
+Run Permify service with the following steps;
+
+**1.** Open terminal and run following line
 
 ```shell
 docker pull ghcr.io/permify/permify
 ```
+**2.** Open your [docker desktop](https://docs.docker.com/get-docker/).
 
-3. Open images, and find Permify.
-4. Run Permify with the following credentials (optional settings)
-    - **Container Name:** permify-container
-      
-      *Ports:*
-    - **Local Host:** 3476
-      
-      *Volumes:*
-    - **Host Path:** choose the config file's (which addresses **"config.yaml"**) folder.
-    - **Container Path:** /config
+**3.** Open images, and find Permify.
 
-:::info
-Above Host Path addresses folder of "config.yaml" file, where you configure databases to store and coordinate your authorization data. 
+![found-image](https://user-images.githubusercontent.com/34595361/193456544-c58e53a4-a257-4787-8ef9-2470a5c21fe5.png)
+
+**4.** Hit the Run button and choose optional setting to run Permify container.
+
+![found-image](https://user-images.githubusercontent.com/34595361/193477621-4477ebdb-4a19-4d6d-b5ee-159aba1740d5.png)
+
+Above **Host path** addresses the folder of **config.yaml** file, where you configure databases to store and coordinate your authorization data. 
 
 Permify stores your authorization data in a database you prefer as relation tuples. We called that database **‘writeDB’**, and you can define it using our YAML file.
 
-*** Example config.yaml file *** 
+*** Sample config.yaml file *** 
 
 ```yaml
 app:
@@ -123,13 +122,24 @@ database:
     pool_max: 20
 ```
 
-Check out [Synchronize Authorization Data] section to learn how to organize this config YAML file and get more details  about how Permify centralize your authorization data.
+#### **database:**
+* **write:** Points out where your want to store your authorization data (relation tuples, audits, decision logs, authorization model )
+    * **connection:** Data source. Permify supports **MongoDb** (`'mongo'`) and **PostgreSQL**(`'postgres'`) for now. Contact with us for your preferred database.
+    * **database:** Custom database name.
+    * **uri:** Uri of your data source.
+    * **pool_max:** Max connection pool size.
 
-[Synchronize Authorization Data]:  /docs/getting-started/sync-data
-:::
+Check out [Centralize Authorization Data] section to learn how to organize this config YAML file and get more details  about how authorization data stored.
 
-5. Test your connection.
+[Centralize Authorization Data]:  /docs/getting-started/sync-data
+
+**5.** Test your connection.
     - Create an HTTP GET request ~ localhost:3476/v1/status/ping
+
+
+</p>
+</details> 
+
 
 ## Model your Authorization with Permify Schema
 
@@ -139,9 +149,7 @@ You can define your entities, relations between them and access control decision
 
 ### Creating your authorization model
 
-Firsly create a file with extension ***".perm"***. This is our Permify Schema file.
-
-To give an example, we'll be using following user-organization authorization case. 
+Firsly create a file with extension ***".perm"***. This will be our Permify Schema file. Let's create our authorization model. We'll be using following user-organization authorization case for this guide. 
 
 ```perm
 entity user {} 
@@ -157,7 +165,7 @@ entity organization {
 } 
 ```
 
-We have 2 entities these are **"user"** and **"organization"**. Entities represents your main tables. We strongly advise naming entities the same as your original database entities.
+We have 2 entities these are **"user"** and **"organization"**. Entities represents your main tables. We strongly advise naming entities the same as your original database entities. 
 
 Lets roll back our example, 
 
@@ -258,11 +266,13 @@ Access decisions generated according to relational tuples, which stored in your 
 
 [Permify Schema]: /docs/getting-started/modeling
 
-## Example Check
+## Perform Access Check
 
-Lets examine a example access control decision on our organization example: 
+Finally we're ready to control authorization. Lets perform an example access check via [check] API. 
 
-***Can the user X view files on organization Y ?***
+[check]: ./api-overview/check-api.md
+
+***Can the user 45 view files on organization 1 ?***
 
 ### Path: 
 
@@ -287,7 +297,7 @@ POST /v1/permissions/check
     "action": "view_files",
     "subject": {
         "type":"user",
-        "id": "1"
+        "id": "45"
     }
 }
 ```
@@ -306,6 +316,10 @@ POST /v1/permissions/check
     }
 }
 ```
+
+See [Access Control Check] section for learn how access checks works and access decisions evaluated in Permify
+
+[Access Control Check]: ./getting-started/enforcement.md
 
 ## Need any help ?
 
