@@ -80,7 +80,7 @@ Permify Engine to compute access decision in 2 steps,
 
 Let's turn back to above authorization question ( ***"Can the user 3 edit document 12 ?"*** ) to better understand how decision evaluation works. 
 
-[relational tuples]: /docs/relational-tuples
+[relational tuples]: /docs/getting-started/relational-tuples
 [Permify Schema]:  /docs/getting-started/modeling
 
 When Permify Engine recieves this question it ireclty looks up to authorization model to find document `‍edit` action. Let's say we have a model as follows

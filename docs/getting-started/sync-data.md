@@ -77,11 +77,11 @@ source solution, it's better to host databases in your servers for **low latency
 
 In Permify, authorization data stored as [Relation Tuples] into your preferred database. These relational tuples represents your authorization data.
 
-[Relation Tuples]: /docs/relational-tuples
+[Relation Tuples]: ../getting-started/relational-tuples
 
 Relational tuples can be created with an simple API call in runtime, since relations and authorization data's are live instances. Each relational tuple should be created according to its authorization model, [Permify Schema]. 
 
-[Permify Schema]: docs/getting-started/modeling
+[Permify Schema]: ../getting-started/modeling
 
 ![tuple-creation](https://user-images.githubusercontent.com/34595361/186637488-30838a3b-849a-4859-ae4f-d664137bb6ba.png)
 
