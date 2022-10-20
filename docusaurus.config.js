@@ -49,7 +49,7 @@ const config = {
           items: [
             {
               type: 'doc',
-              docId: 'intro',
+              docId: 'permify-overview/intro',
               position: 'left',
               label: 'Docs',
             },
@@ -83,7 +83,7 @@ const config = {
               items: [
                 {
                   label: 'Docs',
-                  to: '/docs/intro',
+                  to: '/docs/permify-overview/intro',
                 },
               ],
             },
