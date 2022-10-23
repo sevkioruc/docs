@@ -17,7 +17,7 @@ function HomepageHeader() {
                 <div className={styles.buttons}>
                     <Link
                         className="button button--secondary button--lg"
-                        to="/docs/intro">
+                        to="/docs/permify-overview/intro">
                         Permify Tutorial - 5min ⏱️
                     </Link>
                 </div>
@@ -42,5 +42,5 @@ function HomepageHeader() {
 
 export default function Home() {
     // const {siteConfig} = useDocusaurusContext();
-    return <Redirect to="/docs/intro" />;
+    return <Redirect to="/docs/permify-overview/intro" />;
 }
