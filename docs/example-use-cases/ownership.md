@@ -34,7 +34,7 @@ comment:3#owner@user:51
 
 For more details about how relational tuples created and stored your preferred database, see [Relational Tuples].
 
-[Relational Tuples]: ../getting-started/relational-tuples.md
+[Relational Tuples]: ../getting-started/sync-data.md
 
 ## Need any help ?
 

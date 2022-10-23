@@ -31,11 +31,11 @@ Permify's data model is inspired by Google’s consistent, global authorization 
 In Permify, authorization divided into 3 core aspects; **modeling**, **storing authorization data** and **access checks**.  
 
 - See how to [Model your Authorization] using Permify Schema.
-- Learn how Permify [Stores Authorization Data] as relations.
+- Learn how Permify [Store Authorization Data] as relations.
 - Perform an [Access Checks] anywhere in your stack.
 
 [Model your Authorization]: /docs/getting-started/modeling
-[Stores Authorization Data]: /docs/getting-started/sync-data
+[Store Authorization Data]: /docs/getting-started/sync-data
 [Access Checks]: /docs/getting-started/enforcement
 
 This document explains how Permify handles these aspects to provide a robust and scalable unified authorization system for your applications. For the ones that want trying out and examine it instantly, 

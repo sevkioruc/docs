@@ -122,7 +122,7 @@ organization:21#agent@user:ege
 
 For more details about how relational tuples are created and stored in your preferred database, see [Relational Tuples].
 
-[Relational Tuples]: ../getting-started/relational-tuples.md
+[Relational Tuples]: ../getting-started/sync-data.md
 
 ## Need any help ?
 
