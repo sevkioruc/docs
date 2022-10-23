@@ -45,6 +45,7 @@ const config = {
           logo: {
             alt: 'Permify Logo',
             src: 'img/logo.svg',
+            href: 'https://www.permify.co/',
           },
           items: [
             {

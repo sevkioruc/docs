@@ -56,7 +56,7 @@ This document explains how Permify handles these aspects to provide a robust and
                 <i class="fa-brands fa-youtube"></i>
                 <img src="https://user-images.githubusercontent.com/34595361/196480295-1d124c75-2ee9-4cf1-ba19-6326c6c4a93d.png"/>
             </div>
-            Set Up & Run Permify instance in your enviroment 
+            Set Up & Run Permify service in your enviroment 
         </Button>
     </a>
     <a href="https://www.permify.co/post/google-zanzibar-in-a-nutshell">

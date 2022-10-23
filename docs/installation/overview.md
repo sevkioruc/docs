@@ -88,8 +88,6 @@ After installation completed and Permify server is running, next step is modelin
 
 You can define your entities, relations between them and access control decisions of each actions with using [Permify Schema].
 
-[Permify Schema]: /docs/getting-started/modeling.md
-
 ### Creating your authorization model
 
 Permify Schema can be created on our [playground](https://play.permify.co/) as well as in any IDE or text editor. We also have a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=Permify.perm) to ease modeling Permify Schema with code snippets and syntax highlights. Note that on VS code the file with extension is ***".perm"***.
@@ -202,7 +200,7 @@ Access decisions generated according to relational tuples, which stored in your 
 
 Finally we're ready to control authorization. Lets perform an example access check via [check] API. 
 
-[check]: ./api-overview/check-api.md
+[check]: /docs/api-overview/check-api
 
 ***Can the user 45 view files on organization 1 ?***
 

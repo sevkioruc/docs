@@ -13,9 +13,7 @@ Here’s a simple breakdown of our schema.
 
 ![permify-schema](https://user-images.githubusercontent.com/34595361/183866396-9d2850fc-043f-4254-aa4c-ee2c4172afb8.png)
 
-This schema represents your authorization model. You can create Permify Schema file with **.perm** file extension. And you can configure it on Permify API via sending schema file. See the [API endpoint](https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha3#/Schema/schemas.write) for configuration.
-
-[Installation Guide]:  /docs/Installation#configuring-schema-on-permify
+Permify Schema can be created on our [playground](https://play.permify.co/) as well as in any IDE or text editor. We also have a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=Permify.perm) to ease modeling Permify Schema with code snippets and syntax highlights. Note that on VS code the file with extension is ***".perm"***.
 
 ## Developing a Schema
 

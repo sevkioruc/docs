@@ -1,7 +1,7 @@
 
 # Where does Permify fit into your enviroment?
 
-Permify is a simply API service (availalbe as GRPC or REST options) that responsible for managing and authorization in your enviroment, across your applications. 
+Permify is a simply GRPC service (with an HTTP option) that responsible for managing and authorization in your enviroment, across your applications. 
 
 Permify stores access control relations on a database you choose and performs authorization checks based on the stored relations. We called that database Write Database - **WriteDB** - and it behaves as a centralized data source for your authorization system. 
 
