@@ -8,11 +8,10 @@ In Permify, you can perform access control checks as both [resource specific] an
 
 A simple [resource specific] access check takes form of ***Can the subject U perform action X on a resource Y ?***. A real world example would be: can user:1 edit document:2 where the right side of the ":" represents identifier of the entity.
 
-
 On the other hand [subject specific] access check takes form of  ***Which resources does subject U perform an action X ?*** This option is best for filtering data or bulk permission checks. For example you list some resources with pagination and want to get the exact resource list of user:1 can delete on each page.
 
 [resource specific]: #resource-specific-check-request
-[subject specific]: #subject-specific-check-request-beta
+[subject specific]: #subject-specific-data-filtering-check-request
 
 ## Performance & Availability
 
@@ -140,7 +139,7 @@ Since edit action consist **or** between owner and parent.admin, if Permify Engi
 
 Rather than **or**, if we had an **and** relation then Permify Engine waits the results of these queries to returning a decision. 
 
-## Subject Specific Check Request (Beta)  
+## Subject Specific (Data Filtering) Check Request
 
 For this access check you can ask questions in form of “Which resources can user:X do action Y?” And you’ll get a SQL query without any conditions (filter, pagination or sorting etc) attached to it. 
 
@@ -152,9 +151,7 @@ Let's follow an simplified access control decision for examining the subject spe
 
 ***Which documents can user:2 edit ?***
 
-#### Path:  
-
-IN PROGRESS
+#### Path: /v1/permissions/lookup-query
 
 #### Request
 

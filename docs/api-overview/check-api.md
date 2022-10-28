@@ -1,8 +1,13 @@
 # Check Access Control
 
-In Permify, you can check authorization with single [check] request. This method returns a decision about whether user can perform an action on a certain resource. For example, ***Can the user 1 push to respository 1 ?***
+In Permify, you can perform two different types access checks,
 
-[check]:  https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha4#/Permission/permissions.check
+- **resource based** authorization checks, in form of `Can user U perform action Y in resource Z ?`
+- **subject based (data filtering)** authorization checks , in form of `Which records can user U edit ?`
+
+In this section we'll investigate proior check request of Permify: **resource based** authorization checks. You can find subject based access checks in [data filtering] section.
+
+[data filtering]: ./data-filtering
 
 **Path:** POST /v1/permissions/check
 
