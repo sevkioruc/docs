@@ -96,6 +96,9 @@ Permify Schema can be created on our [playground](https://play.permify.co/) as w
 If you're planning to test Permify manually, maybe with an API Design platform such as [Postman](https://www.postman.com/), [Insomnia](https://insomnia.rest/), etc; we're suggesting using our playground to create model. Because Permify Schema needs to be configured (send to API) in Permify API in a **string** format. Therefore, created model should be converted to **string**. 
 
 Although, it could easily be done programmatically, it could be little challenging to do it manually. To help on that, we have a button on the playground to copy created model to the clipboard as a string, so you get your model in string format easily.
+
+![copy-btn](https://user-images.githubusercontent.com/34595361/198015792-a7f0d727-a1a5-4039-b0be-d097321b8d53.png)
+
 :::
 
 Let's create our authorization model. We'll be using following a simple user-organization authorization case for this guide. 
@@ -131,7 +134,7 @@ For implementation sake we'll not dive more deep about modeling but you can find
 [example use cases]: /docs/example-use-cases/simple-rbac
 :::
 
-### Configuring Permify Schema on API 
+### Configuring Permify Schema to API 
 
 After modeling completed, you need to send Permify Schema - authorization model - to API endpoint **/v1/schemas/write"** for configuration of your authorization model on Permify API.
 

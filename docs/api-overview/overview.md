@@ -4,28 +4,28 @@ sidebar_position: 1
 
 # Overview
 
-In addition to performing access control checks, Permify API provides various functionalities around your authorization such as reading and writing relation tuples, expanding your permissions (schema actions), and more.
+Permify API provides various functionalities around authorization such as performing access checks, reading and writing relation tuples, expanding your permissions (schema actions), and more.
 
-We structured Permify API in 3 core parts; *modeling authorization*, *managing authorization data* and *enforcement*. Therefore, Permify API has sections that represent the functionalities of these core parts.
+We structured Permify API in 3 core parts; *modeling authorization*, *storing authorization data* and *enforcement*. Therefore, Permify API has sections that represent the functionalities of these core parts.
 
 - **Permission Section**: Consist enforcement requests and options.
 - **Relationship Section**: Authorization data operations such as creating, deleting and reading relational tuples.
 - **Schema Section**: Modeling and Permify Schema related functionalities including configuration and auditing.
-- **Server Section**: Basic server informations.
 
-Permify primarily exposes its APIs via [REST](https://restfulapi.net/).
-
+Permify exposes its APIs via both [gRPC](https://buf.build/permify/permify/docs/main:base.v1) and [REST](https://restfulapi.net/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/16122080-54b1e316-8105-4440-b5bf-f27a05a8b4de?action=collection%2Ffork&collection-url=entityId%3D16122080-54b1e316-8105-4440-b5bf-f27a05a8b4de%26entityType%3Dcollection%26workspaceId%3Dd3a8746c-fa57-49c0-83a5-6fcf25a7fc05)
-[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://app.swaggerhub.com/apis-docs/permify/permify-api/v0.0.0-alpha4)
+[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://app.swaggerhub.com/apis-docs/permify/permify-api)
+
 
 ## Core Paths
 
 - Check access with [Check API](./check-api.md)
 - Write relational tuples with [Write API](./write-relationships.md)
+- Configure your authorization model with [Schema Write](./write-schema)
 - Expand schema actions with [Expand API](./expand-api.md)
 - Get permissions of your resources with [Schema Lookup](./schema-lookup.md)
-- read relation tuples and filter them with [Read API](./read-api.md)
+- Read relation tuples and filter them with [Read API](./read-api.md)
 
 ## Need any help ?
 

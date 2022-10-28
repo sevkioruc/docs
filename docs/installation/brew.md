@@ -28,7 +28,7 @@ Check out the [Centralize Authorization Data] section to learn how to organize t
 
 | Flag | Description | Default | 
 |--------------------------|----------| ----------|
-|  --authn-enabled     | Enable server authentication | true | 
+|  --authn-enabled     | Enable server authentication | false | 
 |  --authn-preshared-keys   | Preshared key/keys for server authentication. | - | 
 |  --database-engine     | Data source. Permify supports PostgreSQL('postgres') for now. |  memory | 
 |  --database-name    | Custom database name |  - |

@@ -55,9 +55,19 @@ const config = {
               label: 'Docs',
             },
             {
-              to: 'https://app.swaggerhub.com/apis-docs/permify/permify-api',
+              type: 'dropdown',
               label: 'API Reference',
               position: 'left',
+              items: [
+                {
+                  label: 'gRPC API Reference',
+                  href: 'https://buf.build/permify/permify/docs/main:base.v1',
+                },
+                {
+                  label: 'REST API Reference',
+                  href: 'https://app.swaggerhub.com/apis-docs/permify/permify-api',
+                },
+              ],
             },
             {
               href: 'https://github.com/Permify/permify',
