@@ -255,6 +255,3 @@ We can use expand API to reason the access actions. If we want to reason access 
 #### **Graph Representation of Expanding Read Action**
 
 ![graph-of-relations](https://user-images.githubusercontent.com/34595361/186653899-7090feb5-8ef4-4a8c-991f-ed9475a5e1f7.png)
-
-
-

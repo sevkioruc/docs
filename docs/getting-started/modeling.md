@@ -57,7 +57,7 @@ Relations represent relationships between entities. It's probably the most criti
 
 An example relation takes form of,
 
-```
+```perm
 relation [name] @[type] 
 ```
 
@@ -110,7 +110,7 @@ entity repository {
 → ``action push = owner`` indicates only the repository owner can push to
 repository.
 
-```
+```perm
 entity repository {
 
     relation  owner @user         

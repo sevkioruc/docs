@@ -125,7 +125,7 @@ const config = {
         },
         colorMode: {
           disableSwitch: true,
-          respectPrefersColorScheme: false,
+          respectPrefersColorScheme: true,
         },
         prism: {
           theme: lightCodeTheme,

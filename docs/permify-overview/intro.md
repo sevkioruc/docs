@@ -40,33 +40,30 @@ In Permify, authorization divided into 3 core aspects; **modeling**, **storing a
 
 This document explains how Permify handles these aspects to provide a robust and scalable unified authorization system for your applications. For the ones that want trying out and examine it instantly, 
 
-<div class="next-steps-grid">
+<div class="getting-started-grid">
     <a href="https://play.permify.co/">
-        <Button class="btn btn-video">
+        <div class="btn-thumb">
             <div class="thumbnail">
-                <i class="fa-brands fa-youtube"></i>
                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/6332bb38106ffd85102bb3bc_Screen%20Shot%202022-09-27%20at%2011.58.27.png"/>
             </div>
            Use our Playground to test your authorization in a browser.
-        </Button>
+        </div>
     </a>
     <a href="https://docs.permify.co/docs/Installation">
-        <Button class="btn btn-video">
+        <div class="btn-thumb">
             <div class="thumbnail">
-                <i class="fa-brands fa-youtube"></i>
-                <img src="https://user-images.githubusercontent.com/34595361/196480295-1d124c75-2ee9-4cf1-ba19-6326c6c4a93d.png"/>
+                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/6332bb38106ffd85102bb3bc_Screen%20Shot%202022-09-27%20at%2011.58.27.png"/>
             </div>
-            Set Up & Run Permify service in your enviroment 
-        </Button>
+            Set Up Permify service in your enviroment 
+        </div>
     </a>
     <a href="https://www.permify.co/post/google-zanzibar-in-a-nutshell">
-        <Button class="btn btn-video">
+        <div class="btn-thumb">
             <div class="thumbnail">
-                <i class="fa-brands fa-youtube"></i>
                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/634520d7859cd419ec89f9ef_Google%20Zanzibar%20in%20a%20Nutshell-1.png"/>
             </div>
             Examine Google Zanzibar In A Nutshell
-        </Button>
+        </div>
     </a>
 </div>
 

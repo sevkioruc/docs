@@ -198,7 +198,7 @@ entity document {
 
 As you notice above we have a new syntax at end of the entity relations: `column:...`. This representation means if you identified the specific relation in the database table (which references the entity) then you can define it to get a leaner SQL query. For example;
 
-```
+```perm
 relation owner @user `column:owner_id`
 ```
 
@@ -226,7 +226,7 @@ It's important to define columns of the relations that are already kept in your 
 
 To show workflow of generating SQL query, let's add one more rule to our edit action and update document entity as:
 
-```
+```perm
 entity document {
 
    relation parent @organization `column:parent_id`
@@ -255,7 +255,7 @@ And let's ask our access question again; ***Which documents can user:2 edit ?***
 
 After the API call, our engine first checks the configured Permify Schema ( your authorization model ) and find the push action statement, which is: 
 
-```
+```perm
 action edit = owner or parent.admin
 ```
 
@@ -265,7 +265,7 @@ So, result will be the list of documents that user:2 is either owner or an paren
 
 If we start with owner action, 
 
-```
+```perm
 relation  owner  @user `column:owner_id`
 ```
 
@@ -285,7 +285,7 @@ And with combining these two questions we come up with a query:
 
 When we look at the column of parent relation we see the `parent_id:1`, so we need to check the `parent_id` column.
 
-```
+```perm
 relation parent @organization `column:parent_id`
 ```
 
@@ -293,7 +293,7 @@ Only stored data related with this is  `document:1#parent@organization:1#…` So
 
 #### SQL  
 
-```
+```sql
 select * from documents INNER JOIN organizations
 ON documents.parent_id = organizations.id 
 where owner_id = 2 or organizations.id = 1
@@ -305,7 +305,7 @@ where owner_id = 2 or organizations.id = 1
 
 Finally, our API endpoint returns the result SQL. This endpoint will return a query without any sort, filter, etc. After you got the response,  you can customize the query with the needed conditions, like below:
 
-```
+```sql
 select * from documents INNER JOIN organizations
 ON documents.parent_id = organizations.id 
 where owner_id = 2 or organizations.id = 1 limit 10 offset 15
