@@ -13,18 +13,21 @@ An authorization service is a module that allows you to manage access to your ap
 
 ## Why should I use Authorization Service instead of doing from strach?
 
-#### Move & Iterate Faster 
+### Move & Iterate Faster 
 Avoid the hassle of building your a new authorization system, save time and money by leveraging existing, battle-tested code that has been developed by a team rather than starting from scratch. You can started quickly with a simple API that you can easily integrate into your application to move and iterate faster.
 
-#### Do Not Reinvent The Wheel
+### Do Not Reinvent The Wheel
 Permify based on [Google Zanzibar], which is the global authorization system used at Google for handling authorization for hundreds of its services and products including; YouTube, Drive, Calendar, Cloud and Maps. Building a scalable and performent authorization system is hard and needs a quite engineering time. Zanzibar system achieved more than 95% of the access checks responded in 10 milliseconds and has maintained more than 99.999% availability for the 3 year period. Permify applies proven techniques that Google used. We’re trying to make Zanzibar available to everyone to use and benefit in their applications and services.
 
 [Google Zanzibar]: https://www.permify.co/post/google-zanzibar-in-a-nutshell
 
-#### Be Extendable, At Any Time
+### Gain Visibility Across Teams
+Enterprise-grade authorizations require robust and fine-grained permissions as well as being able to observe and work on these permissions as a group. Yet, code-level authorization logic and distributed authorization data among multiple services make it harder to change permissions and keep them up to date all the time. Permify is designed to abstract authorization logic from your code and make authorization available to everyone including non-technical people in your organization. 
+
+### Be Extendable, At Any Time
 Products quickly changes due to never-ending user requirements as the company scales. It's so common that oldest authorization systems will fall short and needs to be changed in the road. Refactoring existing authorization systems is hard because generally these systems sits at the heart of your product. Permify has an extendable authorization language that allows you to update the current authorization model easily, securely, and without affecting production. After it's tested and ready to go, you can switch new version of your model without breaking a sweat.
 
-#### Audit Your Authorization and Ensure Security
+### Audit Your Authorization and Ensure Security
 Protect your data, prevent unauthorized access and ensure your customers security. Permify can help you with things like fraud detection, real-time transaction monitoring, and even risk assessment with various functions that can be used easily with single API calls.
 
 ## Cases that can benefit from An Authorization Service:
