@@ -12,19 +12,19 @@ Permify's data model is inspired by Google’s consistent, global authorization 
 
 ## Key Features
 
-⚙️ Zero-config API, **one-minute setup** with a single command
+⚙️ **Production ready** authorization API that serve as **gRPC** and **REST**
 
-🔮 Easily model and refactor your authorization with **Permify's DSL, Permify Schema**
+🔮 Domain Specific Authorization Language - Permify Schema - to **easily model** your authorization
 
-🔐 Define and store your permissions **in house** with high availability
+🔐 Database Confsiguration to store your permissions **in house** with **high availability**
 
-✅ Ask authorization questions and get answers down to 10ms with **parallel graph engine**
+✅ Ask authorization questions and get answers **down to 10ms** with **parallel graph engine**
 
-💪 Battle tested, robust authorization pattern based on [Google Zanzibar](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf)
+💪 Battle tested, robust **authorization architecture and data model** based on [Google Zanzibar](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf)
 
-📝 **Audit & Reason** your access control hassle-free with various functionalities
+📝 **Audit & Reason** your access control hassle-free with various functionalities via API
 
-🩺 Analyze **performance and behavior** of your authorization with tracing tools [jaeger], [signoz] or [zipkin]
+⚡ Analyze **performance and behavior** of your authorization with tracing tools [jaeger], [signoz] or [zipkin]
 
 [jaeger]: https://www.jaegertracing.io/
 [signoz]: https://signoz.io/
@@ -42,7 +42,7 @@ In Permify, authorization divided into 3 core aspects; **modeling**, **storing a
 [Store Authorization Data]: /docs/getting-started/sync-data
 [Access Checks]: /docs/getting-started/enforcement
 
-This document explains how Permify handles these aspects to provide a robust and scalable unified authorization system for your applications. For the ones that want trying out and examine it instantly, 
+This document explains how Permify handles these aspects to provide a robust and scalable authorization system for your applications. For the ones that want trying out and examine it instantly, 
 
 <div class="getting-started-grid">
     <a href="https://play.permify.co/">

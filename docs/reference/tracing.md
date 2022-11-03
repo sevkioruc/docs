@@ -1,8 +1,5 @@
----
-disabled: true
----
 
-# Trace Performance 
+# Tracing Tools
 
 Permify has integrations with some of popular tracing tools to analyze performance and behavior of your authorization. These are:
 
