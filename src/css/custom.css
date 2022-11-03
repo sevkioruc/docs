@@ -116,6 +116,7 @@ html[data-theme='dark'] .header-github-link:before {
   align-items: center;
   text-align: center;
   padding-bottom: 10px;
+  height: 232px;
 
   background-color: #291A47;
   border-radius: 8px;
@@ -129,6 +130,14 @@ html[data-theme='dark'] .header-github-link:before {
   margin-bottom: 10px;
   position: relative;
 }
+
+.btn-thumb .thumb-txt {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  padding: 0 5px;
+}
+
 
 .btn-thumb img {
   height: 160px;

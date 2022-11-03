@@ -10,17 +10,21 @@ With Permify you can easily structure your authorization model, store authorizat
 
 Permify's data model is inspired by Google’s consistent, global authorization system, [Google Zanzibar Paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf).
 
-## Core Features of Permify
+## Key Features
 
-🔐 Store your permissions **in house** with high availability.
+⚙️ Zero-config API, **one-minute setup** with a single command
 
-🔮 Easily model and refactor your authorization with **Permify's DSL, Permify Schema**.
+🔮 Easily model and refactor your authorization with **Permify's DSL, Permify Schema**
 
-📝 **Audit & Reason** your access control hassle-free with various methods.
+🔐 Define and store your permissions **in house** with high availability
 
-✅ High performence on authorization questions with **parallel graph engine**.
+✅ Ask authorization questions and get answers down to 10ms with **parallel graph engine**
 
-🩺 Analyze **performance and behavior** of your authorization with tracing tools [jaeger], [signoz] or [zipkin].
+💪 Battle tested, robust authorization pattern based on [Google Zanzibar](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41f08f03da59f5518802898f68730e247e23c331.pdf)
+
+📝 **Audit & Reason** your access control hassle-free with various functionalities
+
+🩺 Analyze **performance and behavior** of your authorization with tracing tools [jaeger], [signoz] or [zipkin]
 
 [jaeger]: https://www.jaegertracing.io/
 [signoz]: https://signoz.io/
@@ -46,15 +50,15 @@ This document explains how Permify handles these aspects to provide a robust and
             <div class="thumbnail">
                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/6332bb38106ffd85102bb3bc_Screen%20Shot%202022-09-27%20at%2011.58.27.png"/>
             </div>
-           Use our Playground to test your authorization in a browser.
+           <div class="thumb-txt">Use our Playground to test your authorization in a browser. </div>
         </div>
     </a>
     <a href="https://docs.permify.co/docs/Installation">
         <div class="btn-thumb">
             <div class="thumbnail">
-                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/6332bb38106ffd85102bb3bc_Screen%20Shot%202022-09-27%20at%2011.58.27.png"/>
+                 <img src="https://user-images.githubusercontent.com/34595361/199695094-872d50fc-c33b-4d15-ad1d-a3899911a16a.png"/>
             </div>
-            Set Up Permify service in your enviroment 
+            <div class="thumb-txt">Set up Permify Service in your enviroment</div>
         </div>
     </a>
     <a href="https://www.permify.co/post/google-zanzibar-in-a-nutshell">
@@ -62,11 +66,10 @@ This document explains how Permify handles these aspects to provide a robust and
             <div class="thumbnail">
                 <img src="https://uploads-ssl.webflow.com/61bb34defcff34f786b458ce/634520d7859cd419ec89f9ef_Google%20Zanzibar%20in%20a%20Nutshell-1.png"/>
             </div>
-            Examine Google Zanzibar In A Nutshell
+            <div class="thumb-txt">Examine Google Zanzibar In A Nutshell</div>
         </div>
     </a>
 </div>
-
 
 ## Community & Support
 
