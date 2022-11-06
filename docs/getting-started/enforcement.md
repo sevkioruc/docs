@@ -23,7 +23,7 @@ Permify designed to answer these authorization questions efficiently and with mi
 Performance and availability of the API calls - especially access checks - are crucial for us and we're ongoingly improving and testing it with various methods.   
 
 :::info
-We would love to create a test enviroment for you in order to test Permify API and see performance and availability of it. [Schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
+We would love to create a test environment for you in order to test Permify API and see performance and availability of it. [Schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
 :::
 
 [writeDB]: ../getting-started/sync-data.md

@@ -16,7 +16,7 @@ Permify's data model is inspired by Google’s consistent, global authorization 
 
 🔮 Domain Specific Authorization Language - Permify Schema - to **easily model** your authorization
 
-🔐 Database Confsiguration to store your permissions **in house** with **high availability**
+🔐 Database Configuration to store your permissions **in house** with **high availability**
 
 ✅ Ask authorization questions and get answers **down to 10ms** with **parallel graph engine**
 
@@ -58,7 +58,7 @@ This document explains how Permify handles these aspects to provide a robust and
             <div class="thumbnail">
                  <img src="https://user-images.githubusercontent.com/34595361/199695094-872d50fc-c33b-4d15-ad1d-a3899911a16a.png"/>
             </div>
-            <div class="thumb-txt">Set up Permify Service in your enviroment</div>
+            <div class="thumb-txt">Set up Permify Service in your environment</div>
         </div>
     </a>
     <a href="https://www.permify.co/post/google-zanzibar-in-a-nutshell">
