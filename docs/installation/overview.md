@@ -12,7 +12,7 @@ Permify is an open-source authorization service that you can run in your envirom
 4. [Perform Access Check](#perform-access-check)
 
 :::info Talk to an Permify Engineer
-Want to walk through this guide 1x1 rather than docs ? [schedule a call with an Permify engineer](https://calendly.com/ege-permify/30min).
+Want to walk through this guide 1x1 rather than docs ? [schedule a call with an Permify engineer](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert).
 :::
 
 ## Set Up Permify Service
@@ -256,4 +256,4 @@ See [Access Control Check] section for learn how access checks works and access 
 
 ## Need any help ?
 
-Our team is happy to help you get started with Permify. If you struggle with installation or have any questions, [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min). Alternatively you can join our [discord community](https://discord.com/invite/MJbUjwskdH) to discuss.
+Our team is happy to help you get started with Permify. If you struggle with installation or have any questions, [schedule a call with one of our Permify engineers](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert). Alternatively you can join our [discord community](https://discord.com/invite/MJbUjwskdH) to discuss.

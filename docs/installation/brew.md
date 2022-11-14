@@ -67,4 +67,4 @@ You can use our Postman Collection to work with the API. Also see the [Using the
 
 ### Need any help ?
 
-Our team is happy to help you get started with Permify, [schedule a call with an Permify engineer](https://calendly.com/ege-permify/30min).
+Our team is happy to help you get started with Permify, [schedule a call with an Permify engineer](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert).

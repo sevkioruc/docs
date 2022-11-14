@@ -97,4 +97,4 @@ For feature requests, bugs or any improvements you can always open an [issue] on
 
 ## Need any help on Authorization ?
 
-Our team is happy to help you anything about authorization. Moreover, if you'd like to learn more about using Permify in your app or have any questions, [schedule a call with one of our founders](https://calendly.com/ege-permify/30min).
+Our team is happy to help you anything about authorization. Moreover, if you'd like to learn more about using Permify in your app or have any questions, [schedule a call with one of our founders](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert).
