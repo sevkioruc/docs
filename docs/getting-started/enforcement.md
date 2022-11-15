@@ -23,7 +23,7 @@ Permify designed to answer these authorization questions efficiently and with mi
 Performance and availability of the API calls - especially access checks - are crucial for us and we're ongoingly improving and testing it with various methods.   
 
 :::info
-We would love to create a test environment for you in order to test Permify API and see performance and availability of it. [Schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
+We would love to create a test environment for you in order to test Permify API and see performance and availability of it. [Schedule a call with one of our Permify engineers](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert).
 :::
 
 [writeDB]: ../getting-started/sync-data.md
@@ -313,5 +313,5 @@ where owner_id = 2 or organizations.id = 1 limit 10 offset 15
 In this way, we can decouple the condition functionalities from the data filtering. 
 
 :::info
-Bulk permission check or with other name data filtering is a common use case we have seen so far. If you have a similar use case we would love to hear from you. Join our [discord](https://discord.gg/JJnMeCh6qP) to discuss or [schedule a call with one of our Permify engineers](https://calendly.com/ege-permify/30min).
+Bulk permission check or with other name data filtering is a common use case we have seen so far. If you have a similar use case we would love to hear from you. Join our [discord](https://discord.gg/JJnMeCh6qP) to discuss or [schedule a call with one of our Permify engineers](https://meetings-eu1.hubspot.com/ege-aytin/call-with-an-expert).
 :::
